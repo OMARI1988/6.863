@@ -9,9 +9,8 @@
 require "pp"
 
 class Helper
-  
   def self.random_number(first, last)
-     first + rand(last - first)
+    first + rand(last - first)
   end
   
   def self.random_index(probabilities = [])
@@ -46,11 +45,48 @@ class Helper
     
     return selected_index
   end
+end
+
+class Node
+  attr_accessor :lhs
+  attr_accessor :rhs
   
+  def initialize(lhs, rhs)
+    self.lhs = lhs
+    self.rhs = rhs
+  end
+  
+  def to_tree
+    output = ""
+    
+    output += "("
+    output += lhs
+    
+    for item in rhs do
+      if item.class == Node then
+        output += " " + item.to_tree
+      else
+        output += " " + item
+      end
+    end
+    
+    output += ")"
+    
+    return output
+  end
+  
+  def to_s
+    output = []
+    
+    for item in rhs do
+      output << item.to_s
+    end
+    
+    return output.join(" ")
+  end
 end
 
 class Rule
-  
   attr_accessor :probability
   attr_accessor :lhs
   attr_accessor :rhs
@@ -67,7 +103,6 @@ class Rule
 end
 
 class Grammar
-  
   attr_accessor :table
   
   def initialize
@@ -98,7 +133,6 @@ class Grammar
       grammar.add_rule(Rule.new(probability, lhs, rhs))
     end
     
-    
     return grammar
   end
   
@@ -125,12 +159,14 @@ class Grammar
   end
   
   def random_phrase(start_symbol = "START")
-    phrase = []
     choices = @table[start_symbol]
     
     if choices.nil? || choices.size == 0 then
-      phrase << start_symbol
+      return nil
     else
+      lhs = nil
+      rhs = []
+      
       probabilities = []
       for rule in choices do
         probabilities << rule.probability
@@ -139,25 +175,43 @@ class Grammar
       index = Helper.random_index(probabilities)
       choice = choices[index]
       
+      lhs = choice.lhs
+      
       for symbol in choice.rhs do
-        phrase << random_phrase(symbol)
+        node = random_phrase(symbol)
+        
+        if node.nil? then
+          node = symbol
+        end
+        
+        rhs << node
       end
+      
+      return Node.new(lhs, rhs)
     end
-    
-    return phrase.join(" ")
   end
-  
 end
 
 
-grammar_file_name = ARGV[0] || "grammar"
+argv = ARGV.clone
+include_tree = false
 
-count = ARGV[1] || 1
-count = count.to_i
+if argv[0] == "-t" then
+  include_tree = true
+  argv.shift
+end
+
+grammar_file_name = argv[0] || "grammar"
+count = (argv[1] || 1).to_i
 
 grammar = Grammar.parse_file_named(grammar_file_name)
 
 count.times do
-  puts grammar.random_sentence
+  if include_tree then
+    puts grammar.random_sentence.to_tree
+  else
+    puts grammar.random_sentence
+  end
 end
+
 
