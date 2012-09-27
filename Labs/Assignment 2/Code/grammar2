@@ -1,16 +1,27 @@
 
 1 	START	ROOT
+
+# Make normal sentences more common
 3	ROOT	S .
+
+# Exclamations should be less so...
 2	ROOT	S !
+
+# These questions should be even less common because they generally tend to be awkward
 1	ROOT	is it true that S ?
 
 1	S	NP VP
 1	VP	Verb NP
+
+# Increase this probability so we don't have issues will long sentences.
 2	NP	Det Noun
 1	NP	NP PP
 1	PP	Prep NP
+
+# Make adjectives more common
 5	Noun	Adj Noun
 
+# Understood and wated are more versatile so make them higher probability
 2	Verb	ate
 4	Verb	wanted
 2	Verb	kissed
@@ -27,10 +38,11 @@
 4	Noun	chief of staff
 1	Noun	floor
 
-1	Adj	fine
-2	Adj	delicious
+# Fine is a more versatile adjective, make it more common
+2	Adj	fine
+1	Adj	delicious
 1	Adj	perplexed
-2	Adj	pickled
+1	Adj	pickled
 
 1	Prep	with
 1	Prep	on
