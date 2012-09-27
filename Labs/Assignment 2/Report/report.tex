@@ -210,11 +210,6 @@ have been derived in either of two ways.
 
 \bigskip
 \begin{verbatim}
-
-
-
-
-
     (START (ROOT (S (NP (NP (NP (Det every)
                                 (Noun sandwich))
                                      (PP (Prep with)
@@ -228,8 +223,30 @@ have been derived in either of two ways.
                                      (Noun president))))
                   .))
 \end{verbatim}
+
+The other derivation is: 
+
+\bigskip
+\begin{verbatim}
+    (START (ROOT (S (NP (NP (NP (Det every)
+                                (Noun sandwich))
+                                     (PP (Prep with)
+                                         (NP (Det a)
+                                             (Noun pickle)
+                                                 (PP (Prep on)
+                                                    (NP (Det the)
+                                                        (Noun floor)))))))
+                             (VP (Verb wanted)
+                                 (NP (Det a)
+                                     (Noun president))))
+                  .))
+\end{verbatim}
+
+
 \item {\bf Is there any reason to care which derivation was used?}
 \end{enumerate}
+
+The reason why we should care is that the meaning of the sentence fundamentally changes. In the first derivation the sandwiches were on the floor. The the second derivation, the sandwiches had a pickle that was on the floor.
 
 \item\begin{enumerate}
  \item {\bf Does the parser
