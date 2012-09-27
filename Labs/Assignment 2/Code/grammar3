@@ -23,7 +23,7 @@
 1	VP	Verb_Transitive NP
 1	VP	Verb_That TP
 1 VP  Verb_Phrasal PP
-1	VP	VP Conjunction VP
+1	VP	Verb Conjunction VP
 
 1 TP  that NP VP
 
