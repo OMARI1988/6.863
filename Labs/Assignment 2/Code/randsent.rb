@@ -68,7 +68,9 @@ class Grammar
     table[lhs] << rhs
   end
   
-  
+  def random_sentence
+    random_phrase
+  end
   
   def random_phrase(start_symbol = "START")
     phrase = []
@@ -101,6 +103,6 @@ count = count.to_i
 grammar = Grammar.parse_file_named(grammar_file_name)
 
 count.times do
-  puts grammar.random_phrase
+  puts grammar.random_sentence
 end
 
