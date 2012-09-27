@@ -17,15 +17,15 @@
 1 ROOT  is it true that S ?
 
 1	S	NP VP
-1 S TP VP
+1 S TP
+
+1 TP that NP VP
 
 1	VP	Verb_Intransitive
 1	VP	Verb_Transitive NP
 1	VP	Verb_That TP
 1 VP  Verb_Phrasal PP
 1	VP	Verb Conjunction VP
-
-1 TP  that NP VP
 
 1	NP	Det Noun
 1	NP	Noun_Proper
