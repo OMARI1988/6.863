@@ -17,7 +17,7 @@
 1 ROOT  is it true that S ?
 
 1	S	NP VP
-1 S TP NP VP
+1 S TP VP
 
 1	VP	Verb_Intransitive
 1	VP	Verb_Transitive NP
