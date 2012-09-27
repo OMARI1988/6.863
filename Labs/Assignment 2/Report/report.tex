@@ -155,6 +155,43 @@ the fine chief of staff understood the president in the chief of staff .
   in the new grammar (commented) as a file named \verb|grammar3| and about 10
   random sentences that illustrate your modifications.}
 
+Below is a brief summary of my changes. Additional comments with more detail are available in my grammar file.
+
+{\bf Sentence (a)}
+
+To support this sentence I needed to add proper nouns to the grammar. I am assuming that we don't have to deal with the case where a proper noun is preceded by a determiner (for example ``the United States'') so I enforced that determiners can allow precede non-proper nouns.
+
+{\bf Sentence (b)}
+
+I added support for coordinating conjunctions - basically a conjunction that separates two phrases or clauses.
+
+{\bf Sentence (c)}
+
+I added support for intransitive verbs. This required me to break up the verb rule into both transitive and intransitive verbs
+
+{\bf Sentence (d)}
+
+I could not find the correct terminology for this type of verb, but I essentially added support for verbs that are followed by a ``that'' clause.
+
+This also made me add the word ``that'' as a demonstrative adjective.
+
+{\bf Sentence (e)}
+
+To produce this sentence we need to support shifting the ordering of a sentence to allow ``that clauses'' to appear at the beginning. I believe this is an example of a deixis expression.
+
+{\bf Sentence (f)}
+
+I added support for intensifiers that modify adjectives.
+
+{\bf Sentence (g)}
+
+I needed to add support phrasal verbs. Basically, verbs that are followed by a preposition. 
+
+{\bf Other}
+
+I also added any missing words to the vocabulary as was necessary.
+
+
 \item {\bf Give your program an option ``\verb|-t|'' that makes it produce
   trees instead of strings. Generate about 5 more random
 sentences, in tree format. Submit them as well as the commented code
