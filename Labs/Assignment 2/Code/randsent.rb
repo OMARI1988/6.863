@@ -43,6 +43,8 @@ class Grammar
       lhs = tokens[0]
       rhs = tokens[1, tokens.size - 1]
       
+      puts line
+      
       grammar.add_rule(lhs, rhs)
     end
     
