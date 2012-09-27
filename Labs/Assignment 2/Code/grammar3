@@ -27,14 +27,14 @@
 
 1 TP  that NP VP
 
-1	NP	Det Noun_Common
+1	NP	Det Noun
 1	NP	Noun_Proper
 1	NP	NP PP
 1 NP  NP Conjunction NP
 
 1	PP	Prep NP
 
-1	Noun	Adj_With_Modifiers Noun
+1 Noun Adj_With_Modifiers Noun
 1 Noun Noun_Common
 1 Noun Noun_Proper
 
