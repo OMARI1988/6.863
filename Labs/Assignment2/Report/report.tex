@@ -115,7 +115,7 @@ I could have also gotten the same results by making the following change instead
 The grammar file is included in my source submission. The generated sentences can be seen here:
 
 {\tt
-every president pickled a pickled chief of staff .
+every president understood a pickled chief of staff .
 
 the president under every fine president with a sandwich on a chief of staff in a floor in every sandwich with a pickle under the president under a president understood a pickled chief of staff on the chief of staff .
 
@@ -423,16 +423,32 @@ cross-entropy = - \frac{log_2(p(s_1)) \cdot log_2(p(s_2))}{size(vocab)} = - \fra
 
 \item {\bf Based on the above numbers, what {\it perplexity} per word did
   the grammar achieve on this corpus?}
+  
+ The perplexity is computed as $2^{cross-entropy}$. In this case it comes out to: 5.41.
 
 \item {\bf The compression program might not be able to compress the
     following corpus that consists of just two sentences very well.
     Why not? What cross-entropy does the grammar achieve this time?
     Try it and explain.}  (The new 2 sentence corpus is given below.)
 
+The cross-entropy in this case is $\infty$ because the second sentence is not in the grammar. Since the probability of finding that sentence is 0 the cross-entropy goes to $\infty$ because $log(0) = - \infty$ Since the sentence is not in the grammar, we have no way of using that grammar to compress the corpus. Thus, we will need (potentially) an infinite amount of bits so we can literally store each and every sentence that appears. This goes to show the power of leveraging structure in compression schemes. 
+
 \item {\bf How well does {\tt grammar2} do on average at predicting
     word sequences that it generated itself?  Please provide an answer
     in bits per word.  State the command (a Unix pipe) that you used
     to compute your answer.}
+
+The entropy for grammar2 seems to be around 2 bits. The command that I used to test this is:
+
+{\tt ./randsent grammar2 10000 | /path/to/.../parse -C -g ./grammar2 }
+
+The key to getting a good representative value is to generate a large number of random sentences. In my case, I generated 10,000. During one run I generated the following output:
+
+{\tt cross-entropy = 2.03467 bits = -(-341154 log-prob. / 167671 words)}
+ 
+
+
+
 
 \item If you generate a corpus from {\tt grammar2}, then {\tt
     grammar2} should on average predict this corpus better than {\tt
@@ -440,6 +456,11 @@ cross-entropy = - \frac{log_2(p(s_1)) \cdot log_2(p(s_2))}{size(vocab)} = - \fra
   be {\it lower} than the cross-entropies. {\bf Check whether this is true:
     compute the numbers and discuss.} \end{enumerate}
 \end{enumerate}
+
+
+
+
+
 
 \item  {\bf Think about all of the following phenomena, and extend your grammar
   from question 3 to handle them. (Be sure to handle the particular
@@ -455,7 +476,43 @@ I have included sample outputs from the grammar below. I also tested to ensure a
 
 \item {\it Yes-no questions}.
 
+{\tt 
+
+did Sally eat the sandwich with Sally ?
+
+will Sally eat that a president and a very very fine very pickled very very perplexed very very very pickled sandwich ate ?
+
+will every pickle think that the Sally worked on Sally and Sally ?
+
+did Sally with Sally and Sally and the perplexed Sally think that Sally worked and worked ?
+
+will Sally in the who think the president under Sally in a desk and Sally in the very perplexed pickle and the desk and every perplexed Sally under Sally on every pickled Sally and Sally ?
+
+
+
+
+}
+
 \item {\it WH-word questions.} 
+
+{\tt
+
+who worked and worked on Sally ?
+
+where did Sally eat ?
+
+who understood that a president in a Sally thought that Sally and Sally under Sally under Sally under a Sally and Sally and every Sally and Sally under Sally on Sally on a perplexed Sally and a fine Sally in the fine Sally and a very very pickled perplexed Sally on a Sally and Sally and every very very very very very perplexed Sally in Sally on Sally on Sally under every pickle and Sally and Sally in a who and a desk on Sally and the who with every floor and Sally on every very delicious who in Sally in the very very fine Sally and Sally and every very very very fine perplexed Sally and a who in Sally and the who with Sally and the who and a who and Sally and the floor on the very delicious Sally on a delicious chief of staff kissed Sally with Sally and Sally ?
+
+
+what did Sally and Sally think that Sally in Sally worked with Sally and every Sally under ?
+
+who thought that the floor ate and worked under Sally ?
+
+where did Sally eat that Sally and the delicious delicious fine who and Sally in every delicious Sally and a who in every very very delicious Sally and Sally and the Sally with Sally thought that the who sighed and ate ?
+
+
+
+}
 
 \end{enumerate}
 \end{enumerate}
