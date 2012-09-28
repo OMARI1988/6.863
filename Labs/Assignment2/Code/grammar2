@@ -1,31 +1,47 @@
+#
+# Grammar 2
+#
+# Author: Salman Ahmad (saahmad@mit.edu)
+#
+# Changes were made to this file to lead to more
+# natural sounding sentences. 
+#
 
-1 	START	ROOT
+1 START ROOT
 
 # Make normal sentences more common
-3	ROOT	S .
+3 ROOT  S .
 
 # Exclamations should be less so...
-2	ROOT	S !
+2 ROOT  S !
 
-# These questions should be even less common because they generally tend to be awkward
+# These questions should be even less common 
+# because they generally tend to be awkward
 1	ROOT	is it true that S ?
 
 1	S	NP VP
 1	VP	Verb NP
 
-# Increase this probability so we don't have issues will long sentences.
+# Increase this probability so we don't 
+# have issues will long sentences.
 2	NP	Det Noun
 1	NP	NP PP
 1	PP	Prep NP
 
-# Make adjectives more common
+# Make adjectives more common.
 5	Noun	Adj Noun
 
-# Understood and wated are more versatile so make them higher probability
-2	Verb	ate
+# Understood and wanted are more versatile and 
+# go naturally with many more of the nouns that
+# we have so I made them have a higher probability.
 4	Verb	wanted
-2	Verb	kissed
 4	Verb	understood
+2	Verb	ate
+2	Verb	kissed
+
+
+# Pickled is a weird word so I keep it at a 
+# low probability
 1	Verb	pickled
 
 1	Det	the
@@ -33,9 +49,9 @@
 1	Det	every
 
 4	Noun	president
+4	Noun	chief of staff
 2	Noun	sandwich
 2	Noun	pickle
-4	Noun	chief of staff
 1	Noun	floor
 
 # Fine is a more versatile adjective, make it more common
