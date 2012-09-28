@@ -34,7 +34,8 @@
 # Add support for infinitive verbs that can preceed a 
 # noun phrase, that-phrase.
 1 Yes_No_P Yes_No NP Verb_Infinitive NP
-1 Yes_No_P Yes_No NP Verb_Infinitive TP 
+1 Yes_No_P Yes_No NP Verb_Infinitive TP
+1 Yes_No_P Yes_No NP Verb_Infinitive that NP Verb
 1 Yes_No_P Yes_No NP Verb_Infinitive
 
 # Unchanged from grammar 3
