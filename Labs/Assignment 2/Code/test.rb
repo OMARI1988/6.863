@@ -20,7 +20,16 @@ grammar4 = grammar3.clone.concat [
   "where did Sally eat the sandwich ?"
 ]
 
+puts "# Grammar 3"
 for sentence in grammar3 do
   puts `echo "#{sentence}" | ~/6863-assignment2/parse -g ./grammar3`
+end
+
+puts
+puts
+puts "# Grammar 4"
+
+for sentence in grammar4 do
+  puts `echo "#{sentence}" | ~/6863-assignment2/parse -g ./grammar4`
 end
 
