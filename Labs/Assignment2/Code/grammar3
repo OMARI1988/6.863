@@ -85,6 +85,7 @@
 # how some are in multiple categories. "Understood" is
 # both a Verb_That and Verb_Transitive
 
+# Note: I broke up verbs into transitive verbs
 1 Verb_Transitive ate
 1 Verb_Transitive wanted
 1 Verb_Transitive kissed
@@ -92,12 +93,15 @@
 1 Verb_Transitive pickled
 1 Verb_Transitive perplexed
 
+# Note: I broke up verbs into intransitive verbs
 1 Verb_Intransitive worked
 1 Verb_Intransitive sighed
 
+# Note: I added verbs that preceeded a that
 1 Verb_That thought
 1 Verb_That understood
 
+# Note: I added phrasal verbs
 1 Verb_Phrasal worked
 
 1 Det the
@@ -119,6 +123,7 @@
 1 Adj perplexed
 1 Adj pickled
 
+# Note: I added intensifiers
 1 Intensifier very
 
 1 Prep  with

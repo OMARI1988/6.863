@@ -4,53 +4,85 @@
 # Author: Salman Ahmad (saahmad@mit.edu)
 #
 
+# Start node
 1 START ROOT
+
+# Many different types of sentences.
 1 ROOT  S .
 1 ROOT  S !
 1 ROOT  is it true that S ?
+
+# I abstracted out a phrases that result in a 
+# yes or no phrase so I don't have to repeat myself
 1 ROOT  Yes_No_P ?
+
+# These rules support the WH-sentences. Of note, I
+# abstracted out the 'who' line with a rule that takes
+# pronouns in general. This should generalize well with
+# a larger vocabulary.
 1 ROOT  Adverb Yes_No_P ?
 1 ROOT  what Yes_No_P Prep ?
-1 ROOT  who VP ?
+1 ROOT  Pronoun VP ?
 
-
-
-
+# A sentence can be either a normal noun-verb-phrase
+# or it can be deixis and start with a that-clause
 1	S	NP VP
 1 S TP VP
 
-
+# There are three types of Yes_No sentences that we model.
+# To get it to work with many of the sentences, we need to 
+# Add support for infinitive verbs that can preceed a 
+# noun phrase, that-phrase.
 1 Yes_No_P Yes_No NP Verb_Infinitive NP
 1 Yes_No_P Yes_No NP Verb_Infinitive TP 
 1 Yes_No_P Yes_No NP Verb_Infinitive
 
+# Unchanged from grammar 3
 1 TP that NP VP
 
+# Unchanged from grammar 3
 1	VP	Verb_Intransitive
 1	VP	Verb_Transitive NP
 1	VP	Verb_That TP
 1 VP  Verb_Phrasal PP
 1	VP	Verb Conjunction VP
 
+# Unchanged from grammar 3
 1	NP	Det Noun
 1	NP	Noun_Proper
 1	NP	NP PP
 1 NP  NP Conjunction NP
 
+# Unchanged from grammar 3
 1	PP	Prep NP
 
+# Unchanged from grammar 3
 1 Noun Adj_With_Modifiers Noun
 1 Noun Noun_Common
 1 Noun Noun_Proper
-1 Noun Pronoun
 
+# Unchanged from grammar 3
 1 Adj_With_Modifiers Adj
 1 Adj_With_Modifiers Intensifier Adj_With_Modifiers
 
+# Unchanged from grammar 3
 1 Verb Verb_Transitive
 1 Verb Verb_Intransitive
 1 Verb Verb_That
 1 Verb Verb_Phrasal
+
+#
+# The rest of the file is just the vocabulary and the
+# parts of speech they are in. Notice that many words 
+# are in mulitple categories.
+#
+# Also, notice the new categories that were added:
+#
+# - Infinitives (for Verb)
+# - Pronoun (who)
+# - Yes_No (will, did)
+# - Adverb (what, where)
+#
 
 1	Verb_Transitive	ate
 1	Verb_Transitive	wanted
@@ -61,7 +93,6 @@
 
 1 Verb_Intransitive worked
 1 Verb_Intransitive sighed
-1 Verb_Intransitive ate
 
 1 Verb_That thought
 1 Verb_That understood
