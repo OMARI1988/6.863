@@ -197,6 +197,107 @@ I also added any missing words to the vocabulary as was necessary.
 sentences, in tree format. Submit them as well as the commented code
 for your program.} 
 
+The generated sentences are:
+
+{\tt
+\begin{verbatim}
+
+(START (ROOT (S (NP (NP (NP (NP (Det the)
+                                (Noun chief
+                                      of
+                                      staff))
+                            (PP (Prep in)
+                                (NP (Det the)
+                                    (Noun floor))))
+                        (PP (Prep in)
+                            (NP (Det the)
+                                (Noun (Adj pickled)
+                                      (Noun president)))))
+                    (PP (Prep with)
+                        (NP (Det every)
+                            (Noun chief
+                                  of
+                                  staff))))
+                (VP (Verb ate)
+                    (NP (Det a)
+                        (Noun floor))))
+             .))
+
+
+(START (ROOT (S (NP (Det every)
+                    (Noun floor))
+                (VP (Verb ate)
+                    (NP (Det every)
+                        (Noun (Adj fine)
+                              (Noun chief
+                                    of
+                                    staff)))))
+             .))
+
+
+(START (ROOT (S (NP (Det a)
+                    (Noun president))
+                (VP (Verb pickled)
+                    (NP (Det the)
+                        (Noun chief
+                              of
+                              staff))))
+             !))
+
+
+(START (ROOT (S (NP (NP (Det the)
+                        (Noun chief
+                              of
+                              staff))
+                    (PP (Prep in)
+                        (NP (NP (Det every)
+                                (Noun president))
+                            (PP (Prep in)
+                                (NP (NP (NP (Det every)
+                                            (Noun pickle))
+                                        (PP (Prep on)
+                                            (NP (NP (Det the)
+                                                    (Noun (Adj delicious)
+                                                          (Noun president)))
+                                                (PP (Prep under)
+                                                    (NP (NP (Det the)
+                                                            (Noun president))
+                                                        (PP (Prep under)
+                                                            (NP (Det a)
+                                                                (Noun sandwich))))))))
+                                    (PP (Prep with)
+                                        (NP (Det a)
+                                            (Noun president))))))))
+                (VP (Verb wanted)
+                    (NP (NP (Det a)
+                            (Noun sandwich))
+                        (PP (Prep with)
+                            (NP (Det a)
+                                (Noun floor))))))
+             .))
+
+
+(START (ROOT is
+             it
+             true
+             that
+             (S (NP (Det the)
+                    (Noun pickle))
+                (VP (Verb understood)
+                    (NP (NP (Det a)
+                            (Noun president))
+                        (PP (Prep in)
+                            (NP (Det every)
+                                (Noun (Adj fine)
+                                      (Noun chief
+                                            of
+                                            staff)))))))
+             ?))
+
+
+\end{verbatim}
+}
+
 \item When I ran my sentence generator on \verb|grammar|, it produced
   the sentence:
 \begin{verbatim}
@@ -255,8 +356,18 @@ The reason why we should care is that the meaning of the sentence fundamentally 
   derivation instead?  Discuss. (This is the only part of question 6a
   that you need to answer.)}
 
+It does ``misunderstand'' very often. The reason for this is because there is no one single valid parse tree for any given sentence. The parse program stops after it finds a valid parse and reports just that one tree. It does not print out all of the trees (and it is possible for there to be many trees).
+
+Long story short, there is not a 1-to-1 mapping between sentences and parse tree in our CFG. This is unlike, for example, the grammars and parsers for many programming languages where there almost always one (and only one) valid parse tree for a particular chunk of source code.
+
 \item {\bf How many ways are there to analyze the following Noun Phrase (NP)
   under the original grammar?  Explain your answer.}
+
+There are a total of 5 possible parses. The trick to see this is that there are 3 total prepositions in this sentence. Whenever we see a new PP it can apply to any other NP that came before it. So, when we see the first PP, it can only apply to the first NP. The second PP can apply to either of first 2 NP. And the last PP can apply to any of the previous 3. Thus, in total, we have $1 + 2 + 3 = 5$.
+
+This can be confirmed by running the following command:
+
+{\tt echo 'every sandwich with a pickle on the floor under the chief of staff' | ./parse -c -s NP -g grammar}
 
 \item By mixing and matching the commands above, generate a bunch of
   sentences from \verb|grammar|, and find out how many different parses they
