@@ -447,6 +447,11 @@ The key to getting a good representative value is to generate a large number of 
 {\tt cross-entropy = 2.03467 bits = -(-341154 log-prob. / 167671 words)}
  
 
+The numbers I generated for grammar3 are:
+
+{\tt cross-entropy = 2.32311 bits = -(-1061.66 log-prob. / 457 words)}
+
+This is a bit worse which makes sense. Grammar 3 can generate more creative sentences, so that potentially makes sense.
 
 
 
@@ -459,7 +464,29 @@ The key to getting a good representative value is to generate a large number of 
 
 
 
+I computed these numbers by running the following commands:
 
+{\tt
+
+./randsent grammar2 1000 | /path/to.../parse -C -g ./grammar
+
+./randsent grammar2 1000 | /path/to.../parse -C -g ./grammar3
+
+}
+
+The output I got (respectively) is:
+
+{\tt
+
+cross-entropy = 2.12404 bits = -(-35658.4 log-prob. / 16788 words)
+
+cross-entropy = 3.15268 bits = -(-53850.9 log-prob. / 17081 words)
+
+}
+
+So it would appear that the entropy is better than the cross-entropy. Which makes sense. It is important to note that $grammar$ has a smaller cross-entropy than $grammar3$. This result makes sense. 
+
+At a theoretical level if the cross-entropy between $p$ and $m$ is small that means that $m$ is a better approximation of $p$. In our case, we know that the $grammar$ is very similar to $grammar2$ (the only difference are the probabilities). On the other hand, $grammar$ and $grammar3$ are much more different, thus the cross-entropy is larger.
 
 
 \item  {\bf Think about all of the following phenomena, and extend your grammar
