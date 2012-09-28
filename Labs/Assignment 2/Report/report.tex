@@ -387,6 +387,9 @@ These blowups are almost always the result of ``left-recursive'' rules. A ``left
 \noindent
 {\bf Why is \verb+p(best_parse|sentence)+=1?}
 
+The probability is exactly 1 because there is only one valid parse tree for this sentence.
+
+
 \item {\bf Probability analysis of the second sentence:  \\
 \noindent
 What does it mean that \verb+p(best_parse|sentence)+ is 0.5 in this
@@ -394,10 +397,16 @@ case? \\
 \noindent
 Why would it be {\it exactly} 0.5?}
 
+
+The probability is exactly $0.5$ because there are 2 parses for the sentence. Thus, the number of times that the parse will appear will be half of the number of times that the sentence itself appears.
+
+
 \item {\bf Cross-entropy of the two sentence corpus. Explain exactly
     how the following numbers below were calculated from the two sets
     of numbers above, that is, from the parse of each of the two
     sentences.}
+
+
 
 \item {\bf Based on the above numbers, what {\it perplexity} per word did
   the grammar achieve on this corpus?}
