@@ -387,7 +387,9 @@ These blowups are almost always the result of ``left-recursive'' rules. A ``left
 \noindent
 {\bf Why is \verb+p(best_parse|sentence)+=1?}
 
-The probability is exactly 1 because there is only one valid parse tree for this sentence.
+$p(best_parse)$ is so small because there are a huge number of possible sentences that can share this parse trees. The number that were multiplied are the {\bf normalized} numbers in the first column of a grammar rule.
+
+The probability is exactly 1 because there is only one valid parse tree for this particular sentence.
 
 
 \item {\bf Probability analysis of the second sentence:  \\
