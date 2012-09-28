@@ -374,6 +374,10 @@ This can be confirmed by running the following command:
   have. Some sentences will have more parses than others. {\bf Do you
   notice any patterns? Try the same exercise with \verb|grammar3|.}
 
+You quickly notice an exponential blow up. Small sentences have a handful of parses, while larger sentences jump to crazy high numbers like $35357670$.
+
+These blowups are almost always the result of ``left-recursive'' rules. A ``left-recursive'' rule is follows this pattern: A $\rightarrow$ A X. The reason for this is that the X can apply to any of the preceding As. This leads to a blow up in the number of valid parses.
+
 \begin{enumerate} 
 \item {\bf Probability analysis of first sentence: Why is \verb|p(best_parse)| so small?  What probabilities were
   multiplied together to get its value of 5.144032922e-05?}\\
