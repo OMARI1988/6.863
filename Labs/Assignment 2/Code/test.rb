@@ -21,6 +21,6 @@ grammar4 = grammar3.clone.concat [
 ]
 
 for sentence in grammar3 do
-  `echo "#{sentence}" | ~/6863-assignment2/parse -g ./grammar3`
+  puts `echo "#{sentence}" | ~/6863-assignment2/parse -g ./grammar3`
 end
 
