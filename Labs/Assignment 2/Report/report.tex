@@ -76,7 +76,7 @@ the sandwich ate a president .
     Specifically, what grammar rule is responsible and why? What is
     special about this rule?
 
-Long sentences are generated when you have a rule that (or s set of rules) that form a recessive loop. That is a rule $A$ that either directly calls $A$ itself or calls another rule that eventually calls $A$. In our grammar, one such rule is:
+Long sentences are generated when you have a rule that (or s set of rules) that form a recursive loop. That is a rule $A$ that either directly calls $A$ itself or calls another rule that eventually calls $A$. In our grammar, one such rule is:
 
 {\tt NP $\rightarrow$ NP  PP}
 
@@ -89,7 +89,7 @@ The rule that allows multiple adjectives is:
 
 {\tt Noun $\rightarrow$ Adj Noun}
 
-The important thing about this rule is that there are many Noun alternatives which means that it will be recusing at a lower proability.
+The important thing about this rule is that there are many Noun alternatives which means that it will be recursing at a lower probability.
 
 \item {\bf Which numbers must you modify to fix the problems in 2(a) and
     2(b), making the sentences shorter and the adjectives more
@@ -163,11 +163,11 @@ To support this sentence I needed to add proper nouns to the grammar. I am assum
 
 {\bf Sentence (b)}
 
-I added support for coordinating conjunctions - basically a conjunction that separates two phrases or clauses.
+I added support for coordinating conjunctions - basically a conjunction that separates two phrases or clauses. The tricky thing here is that the conjunction must connect two phrases of the same type. For example, a NP and a NP not a NP and a VP. 
 
 {\bf Sentence (c)}
 
-I added support for intransitive verbs. This required me to break up the verb rule into both transitive and intransitive verbs
+I added support for intransitive verbs. This required me to break up the verb rule into both transitive and intransitive verbs as well.
 
 {\bf Sentence (d)}
 
@@ -177,15 +177,15 @@ This also made me add the word ``that'' as a demonstrative adjective.
 
 {\bf Sentence (e)}
 
-To produce this sentence we need to support shifting the ordering of a sentence to allow ``that clauses'' to appear at the beginning. I believe this is an example of a deixis expression.
+To produce this sentence we need to support shifting the ordering of a sentence to allow ``that clauses'' to appear at the beginning. I believe this is an example of a deixis expression. Since it only happened in one place I did not try to abstract and generalize the rule.
 
 {\bf Sentence (f)}
 
-I added support for intensifiers that modify adjectives.
+I added support for intensifiers that modify adjectives. There is now a recursive rule that allows you to tack on as many modifiers to an adjective as possible.
 
 {\bf Sentence (g)}
 
-I needed to add support phrasal verbs. Basically, verbs that are followed by a preposition. 
+I needed to add support phrasal verbs. Basically, verbs that are followed by a preposition that change the meaning. Note that this does not mean in general that any verb can be followed by a prepositional phrase.
 
 {\bf Other}
 
@@ -356,14 +356,14 @@ The reason why we should care is that the meaning of the sentence fundamentally 
   derivation instead?  Discuss. (This is the only part of question 6a
   that you need to answer.)}
 
-It does ``misunderstand'' very often. The reason for this is because there is no one single valid parse tree for any given sentence. The parse program stops after it finds a valid parse and reports just that one tree. It does not print out all of the trees (and it is possible for there to be many trees).
+It does ``misunderstand'' very often. The reason for this is because there is no one single valid parse tree for any given sentence (in general). The parse program stops after it finds a valid parse and reports just that one tree. It does not print out all of the trees (and it is possible for there to be many trees).
 
 Long story short, there is not a 1-to-1 mapping between sentences and parse tree in our CFG. This is unlike, for example, the grammars and parsers for many programming languages where there almost always one (and only one) valid parse tree for a particular chunk of source code.
 
 \item {\bf How many ways are there to analyze the following Noun Phrase (NP)
   under the original grammar?  Explain your answer.}
 
-There are a total of 5 possible parses. The trick to see this is that there are 3 total prepositions in this sentence. Whenever we see a new PP it can apply to any other NP that came before it. So, when we see the first PP, it can only apply to the first NP. The second PP can apply to either of first 2 NP. And the last PP can apply to any of the previous 3. Thus, in total, we have $1 + 2 + 3 = 5$.
+There are a total of 5 possible parses. The trick to see this is that there are 3 total prepositions in this sentence. Whenever we see a new PP it can apply to any of the NP that came before it. So, when we see the first PP, it can only apply to the first NP. The second PP can apply to either of first 2 NP. And the last PP can apply to any of the previous 3. Thus, in total, we have $1 + 2 + 3 = 5$.
 
 This can be confirmed by running the following command:
 
@@ -437,6 +437,11 @@ The probability is exactly $0.5$ because there are 2 parses for the sentence. Th
   in action on new sentences like the ones illustrated below.}
 
 \begin{enumerate}
+
+I have included sample outputs from the grammar below. I also tested to ensure all of the sentences and test case presented in the assignment pass. You can see the test case file in {\tt test.rb} in my source distribution. You can easily see if everything passes by running:
+
+{\tt ./test.rb | grep failure}
+
 \item {\it Yes-no questions}.
 
 \item {\it WH-word questions.} 
