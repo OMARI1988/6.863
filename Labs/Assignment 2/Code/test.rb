@@ -13,6 +13,9 @@ grammar3 = [
 grammar4 = grammar3.clone.concat [
   "did Sally eat a sandwich ?",
   "will Sally eat a sandwich ?",
+  "did the president think ?",
+  "did the president think that Sally ate ?",
+  "did Sally eat the sandwich with ?",
   
   "what did the president think ?",
   "what did the president think that Sally ate ?",
