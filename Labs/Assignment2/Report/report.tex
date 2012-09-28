@@ -41,7 +41,7 @@
 }
 
 \begin{document}
-\handout{Assignment 2: Context-free grammar writing}{My posse consists of: [COLLABORATORS]}{Salman Ahmad (saahmad@mit.edu)}
+\handout{Assignment 2: Context-free grammar writing}{My posse consists of: []}{Salman Ahmad (saahmad@mit.edu)}
 
 \begin{enumerate}
 
@@ -408,6 +408,17 @@ The probability is exactly $0.5$ because there are 2 parses for the sentence. Th
     of numbers above, that is, from the parse of each of the two
     sentences.}
 
+The general formula cross-entropy is not useful for us because the probability distribution is not known. Thus, we have to estimate the cross entropy based on the sentences that we can see from the set. It is shown in the equation below:
+
+\begin{equation}
+cross-entropy = - \sum_{i = 0}^{n} \frac{1}{n} log_2(p(s_i))
+\end{equation}
+
+where $s_i$ is the ith sentence in our corpus of $n$ sentences. The actual math for our particular case is show below:
+
+\begin{equation}
+cross-entropy = - \frac{log_2(p(s_1)) \cdot log_2(p(s_2))}{size(vocab)} = - \frac{log_2(5.14 \times10^-5) + log_2(1.24 \times 10^-9)}{18} = 2.43
+\end{equation}
 
 
 \item {\bf Based on the above numbers, what {\it perplexity} per word did
