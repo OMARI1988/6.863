@@ -74,7 +74,7 @@ sentences_files.each_line do |line|
     end
     
     
-    puts original_word + " " + current_tag + " " + (Math.log2(current_probability)).to_s
+    puts original_word + " " + current_tag + " " + (Math.log(current_probability)/Math.log(2)).to_s
     
   end
   
