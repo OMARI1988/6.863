@@ -1,42 +1,20 @@
 
 require 'set'
 require 'pp'
+require File.join(File.dirname(__FILE__), 'counter.rb')
 
 def emission_probability(word, tag, emission_counts, ngram_counts)
   return (emission_counts[[word, tag]] || 0) / ngram_counts[0][[tag]]
 end
 
 
-counts_file = File.open("ner.counts")
+counter = Counter.new(File.open("ner.counts"))
 
-emission_counts = {}
-word_counts = {}
+emission_counts = counter.emission_counts
+word_counts = counter.word_counts
 
-ngram_counts = []
-entity_tags = Set.new
-
-counts_file.each_line do |line|
-  parts = line.strip().split(" ")
-  count = parts[0].to_f
-  if parts[1] == "WORDTAG" then
-    tag = parts[2]
-    word = parts[3]
-    
-    word_counts[word] ||= 0
-    word_counts[word] += count
-    
-    emission_counts[[word, tag]] = count
-    entity_tags.add(tag)
-  elsif parts[1].end_with?("GRAM")
-    n = parts[1].gsub("-GRAM","").to_f
-    ngram = parts
-    ngram.shift
-    ngram.shift
-    
-    ngram_counts[n-1] ||= {}
-    ngram_counts[n-1][ngram] = count
-  end
-end
+ngram_counts = counter.ngram_counts
+entity_tags = counter.entity_tags
 
 for word, count in word_counts do
   if count < 5
