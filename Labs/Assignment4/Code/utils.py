@@ -20,6 +20,6 @@ def bigram_probability(tag1, tag2, counts):
   
   return counts.ngram_counts[1][(tag1, tag2)] / denominator
 
-def trgram_probability(tag1, tag2, tag3, counts):
-  return counts.ngram_counts[2][(tag1, tag2, tag3)] / bigram_probability(tag1, tag2, counts)
+def trigram_probability(tag1, tag2, tag3, counts):
+  return counts.ngram_counts[2][(tag1, tag2, tag3)] / counts.ngram_counts[1][(tag1, tag2)]
   
