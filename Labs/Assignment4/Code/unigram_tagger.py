@@ -17,10 +17,6 @@ if __name__ == "__main__":
   emission_counts = hmm.emission_counts
   ngram_counts = hmm.ngram_counts
   
-  print ngram_counts
-  sys.exit()
-  
-  entity_tags = ["I-PER", "I-ORG", "I-LOC", "I-MISC", "O"]
   entity_tags = hmm.all_states
   trained_words = defaultdict(int)
   infrequent_words = defaultdict(int)
@@ -35,8 +31,7 @@ if __name__ == "__main__":
   for word in infrequent_words:
     for tag in entity_tags:
       if (word, tag) in emission_counts:
-        emission_counts[("_RARE_", tag)] += 1
-        del emission_counts[(word, tag)]
+        emission_counts[("_RARE_", tag)] += trained_words[word]
   
   line = sentences_file.readline()
   while line:
