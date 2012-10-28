@@ -1,31 +1,11 @@
 
 from collections import defaultdict
-from count_freqs import Hmm
 from count_freqs import *
+from utils import *
 import math
 import sys
 import os
 
-def arg_max(iterator, callback):
-  max_value = -1
-  max_index = None
-  for i in iterator:
-    value = callback(i)
-    if value > max_value:
-      max_value = value
-      max_index = i
-  return (max_index, max_value)
-
-def emission_probability(word, tag, counts):
-  return counts.emission_counts[(word, tag)] / counts.ngram_counts[0][(tag,)]
-
-def bigram_probability(previous_tag, current_tag, counts):
-  if previous_tag == "*":
-    denominator = counts.ngram_counts[1][(previous_tag, previous_tag)]
-  else:
-    denominator = counts.ngram_counts[0][(previous_tag,)]
-  
-  return counts.ngram_counts[1][(previous_tag, current_tag)] / denominator
 
 if __name__ == "__main__":
   counts_file = open(os.path.join(os.path.dirname(__file__), "ner.counts"))
@@ -45,7 +25,6 @@ if __name__ == "__main__":
       for tag in hmm.all_states:
         if (word, tag) in hmm.emission_counts:
           hmm.emission_counts[("_RARE_", tag)] += count
-  
   
   
   
