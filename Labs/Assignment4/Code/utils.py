@@ -12,10 +12,14 @@ def arg_max(iterator, callback):
 def emission_probability(word, tag, counts):
   return counts.emission_counts[(word, tag)] / counts.ngram_counts[0][(tag,)]
 
-def bigram_probability(previous_tag, current_tag, counts):
-  if previous_tag == "*":
-    denominator = counts.ngram_counts[1][(previous_tag, previous_tag)]
+def bigram_probability(tag1, tag2, counts):
+  if tag1 == "*":
+    denominator = counts.ngram_counts[1][(tag1, tag1)]
   else:
-    denominator = counts.ngram_counts[0][(previous_tag,)]
+    denominator = counts.ngram_counts[0][(tag1,)]
   
-  return counts.ngram_counts[1][(previous_tag, current_tag)] / denominator
+  return counts.ngram_counts[1][(tag1, tag2)] / denominator
+
+def trgram_probability(tag1, tag2, tag3, counts):
+  return counts.ngram_counts[2][(tag1, tag2, tag3)] / bigram_probability(tag1, tag2, counts)
+  
