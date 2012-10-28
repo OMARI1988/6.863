@@ -106,8 +106,11 @@ if __name__ == "__main__":
       x[i - 2] = max_tag
       x_probs[i - 2] = max_probability
     
+    print x
+    print x_probs
+    
     for i in range(0, len(words)):
-      print original_words[i] + " " + x[i] + " " #+ str(math.log(x_probs[i])/math.log(2))
+      print original_words[i] + " " + x[i] + " " + str(math.log(x_probs[i])/math.log(2))
     print ""
     
     sys.exit()
