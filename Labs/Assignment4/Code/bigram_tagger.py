@@ -6,6 +6,16 @@ import math
 import sys
 import os
 
+def arg_max(iterator, callback):
+  max_value = -1
+  max_index = None
+  for i in iterator:
+    value = callback(i)
+    if value > max_value:
+      max_value = value
+      max_index = i
+  return (max_index, max_value)
+
 def emission_probability(word, tag, counts):
   return counts.emission_counts[(word, tag)] / counts.ngram_counts[0][(tag,)]
 
@@ -36,20 +46,20 @@ if __name__ == "__main__":
         if (word, tag) in hmm.emission_counts:
           hmm.emission_counts[("_RARE_", tag)] += count
   
+  
+  
+  
   initial_probability = defaultdict(float)
   initial_tag = None
   
-  current_max = -1
   for tag in hmm.all_states:
-    value = bigram_probability("*", tag, hmm)
-    if value > current_max:
-      current_max = value
-      initial_tag = tag
-    initial_probability[tag] = value
+    initial_probability[tag] = bigram_probability("*", tag, hmm)
+  
+  initial_tag = arg_max(hmm.all_states, lambda tag: bigram_probability("*", tag, hmm))[0]
+  
   
   
   sentences = sentence_iterator(simple_conll_corpus_iterator(sentences_file))
-  foo_bar_count = 0
   
   for sentence in sentences:
     original_words = []
@@ -73,54 +83,16 @@ if __name__ == "__main__":
     
     for i in range(1, len(words)):
       for j in hmm.all_states:
-        current_max = -1
-        current_tag = None
-        
-        for k in hmm.all_states:
-          value = t1[(k, i - 1)] * bigram_probability(k , j, hmm) * emission_probability(words[i], j, hmm)
-          if value > current_max:
-            current_max = value
-            current_tag = k
-        
-        t1[(j, i)] = current_max
-        t2[(j, i)] = current_tag
+        t2[(j, i)], t1[(j, i)] = arg_max(hmm.all_states, lambda k: t1[(k, i - 1)] * bigram_probability(k , j, hmm) * emission_probability(words[i], j, hmm))
     
-    
-    current_max = -1.0
-    current_tag = None
-    for k in hmm.all_states:
-      value = t1[(k, len(words) - 1)]
-      if value > current_max:
-        current_max = value
-        current_tag = k
-    
-    
-    x[len(words) - 1] = current_tag
-    x_probs[len(words) - 1] = current_max
+    x[len(words) - 1], x_probs[len(words) - 1] = arg_max(hmm.all_states, lambda k: t1[(k, len(words) - 1)])
     
     for i in reversed(range(1, len(words))):
-      current_max = -1
-      current_tag = None
-      for k in hmm.all_states:
-        value = t1[(k, i - 1)]
-        if value > current_max:
-          current_max = value
-          current_tag = k
-      x[i - 1] = current_tag
-      x_probs[i - 1] = current_max
+      x[i - 1], x_probs[i - 1] = arg_max(hmm.all_states, lambda k: t1[(k, i - 1)])
     
     for i in range(0, len(words)):
       print original_words[i] + " " + x[i] + " " + str(math.log(x_probs[i])/math.log(2))
     print ""
-    
-    foo_bar_count += 1
-    if foo_bar_count == 3:
-      pass
-      #sys.exit()
-
-    
-    
-    
   
   
   
