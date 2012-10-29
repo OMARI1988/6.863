@@ -110,7 +110,7 @@ if __name__ == "__main__":
     print ""
     
     counters += 1
-    if counters == 5:
+    if counters == 1:
       #sys.exit()
       pass
     
