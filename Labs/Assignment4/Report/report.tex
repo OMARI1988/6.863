@@ -107,37 +107,40 @@ The one thing that stood out in development is that you needed to rely on smooth
 The results for my final tagger are:
 
 \begin{verbatim}
+Found 4237 NEs. Expected 5931 NEs; Correct: 3670.
 
-TODO
-
+	 precision 	recall 		F1-Score
+Total:	 0.866179	0.618783	0.721873
+PER:	 0.912338	0.611534	0.732248
+ORG:	 0.787841	0.474589	0.592351
+LOC:	 0.867598	0.711014	0.781540
+MISC:	 0.872126	0.659066	0.750773
 \end{verbatim}
 
 
-The first thing that I explored was increase the frequency counts.
+As can be seen, all of the F1 scores increased over the old trigram tagger. To achieve this performance I added the following classes:
 
-I started by printing all of the rear words from the corpus to get an idea.
+\begin{itemize}
 
+\item {\tt \_ABBREVIATION\_}: any string that consisted of a mix of uppercase letters and `.'
 
+\item {\tt \_NUMBER\_}: any string that consistent only of numbers, `-' and `.'
 
-I created a class for numbers as those should almost always be ``O''. These include comma numbers. They were added to a class called {\tt \_NUMBER\_}
+\item {\tt \_CAPITALIZED\_}: any string that had the first letter uppercase but the rest lowercase
 
-I created a class for punctuation. They were added to a class called {\tt \_PUNCTUATION\_}
+\item {\tt \_UPPERCASE\_}: any string that had all of their letters uppercased
 
-I created a class for capital abbreviations (like ``M.'') as these are almost always I-PER. They were added to a class called {\tt \_ABBREVIATION\_}
+\item {\tt \_LOWERCASE\_}: any string that has all of their letters lowercased
 
-Capitalized
+\item {\tt \_RARE\_}: any string that did not meet any of the above criteria
 
-Upper case 
+\end{itemize}
 
-Lowercase
+While these classes seem fairly boring I also explored many other more interesting classes. For example, I had a special class for {\tt \_PERSONAL\_ABBREVIATIONS\_} (strings that consisted just of an upper case first letter and then a period), {\tt \_HYPHENS\_} (strings that had a hyphen in them), and even classes based on length like {\tt \_SHORT\_} and {\tt \_LONG\_}. 
 
-The rest fell through and were added to {\tt \_RARE\_}
+The interesting thing is that with these sophisticated features my performance dropped substantially. In some cases my total F1 score would fall as low as 0.622202. My guess is that I was over fitting and there was not enough data to justify these very specific tags.
 
-Tweak the smoothing
-
-I found myself over fitting. Abbreciations and hypens were a bad idea. short words vs long words
-
-Using word net?
+Some other things that I explored was playing around with the threshold for infrequent words. While 5 seemed reasonable, I played around with other numbers just to build intuition. However, I found that sticking with 5 seemed to generate the best results.
 
 \end{enumerate}
 \end{document}

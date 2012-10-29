@@ -35,6 +35,7 @@ def trigram_probability(tag1, tag2, tag3, counts, vocab_size):
 def classify_word(word):
   classes = [
     (re.compile("^[A-Z\.]+$"), "_ABREVIATION_"),
+    #(re.compile("(^[A-Z\.]+)|(^[A-Z]{3})$"), "_ABREVIATION_"),
     #(re.compile("^[A-Z]\.$"), "_ABREVIATION_"),
     (re.compile("^[\.\-\,\d]+$"), "_NUMBER_"),
     (re.compile("^[A-Z][a-z]+$"), "_CAPITALIZED_"),
