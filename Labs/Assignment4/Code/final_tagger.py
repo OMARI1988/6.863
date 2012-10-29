@@ -33,8 +33,7 @@ if __name__ == "__main__":
     if count < infrequent_count:
       for tag in hmm.all_states:
         if (word, tag) in hmm.emission_counts:
-          #hmm.emission_counts[("_RARE_", tag)] += count
-          hmm.emission_counts[("_RARE_", tag)] += hmm.emission_counts[(word, tag)]
+          hmm.emission_counts[(classify_word(word), tag)] += hmm.emission_counts[(word, tag)]
   
   
   
@@ -60,11 +59,10 @@ if __name__ == "__main__":
       word = sentence[i][1]
       original_words.append(word)
       if not(word in word_counts) or (word_counts[word] < infrequent_count):
-        word = "_RARE_"
+        word = classify_word(word)
       words[i + 1] = word
     
     words[i + 2] = "STOP"
-    
     
     bp = defaultdict(str)
     pi = defaultdict(float)
@@ -110,6 +108,9 @@ if __name__ == "__main__":
       y[k] = bp[(k + 2, y[k + 1], y[k + 2])]
       y_probs[k] = pi[(k + 2, y[k + 1], y[k + 2])]
     
+#    print original_words
+#    print words
+#    print y_probs
     
     for i in range(0, len(original_words)):
       print original_words[i] + " " + y[i + 1] + " " + str(math.log(y_probs[i + 1])/math.log(2))

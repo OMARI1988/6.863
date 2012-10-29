@@ -1,4 +1,6 @@
 
+import re
+
 def arg_max(iterator, callback):
   max_value = -1
   max_index = None
@@ -29,4 +31,21 @@ def trigram_probability(tag1, tag2, tag3, counts, vocab_size):
   numerator = counts.ngram_counts[2][(tag1, tag2, tag3)]
   denominator = counts.ngram_counts[1][(tag1, tag2)]
   return  (numerator + 1) / (denominator + vocab_size)
+  
+def classify_word(word):
+  classes = [
+    (re.compile("^[A-Z\.]+$"), "_ABREVIATION_"),
+    #(re.compile("^[A-Z]\.$"), "_ABREVIATION_"),
+    (re.compile("^[\.\-\,\d]+$"), "_NUMBER_"),
+    (re.compile("^[A-Z][a-z]+$"), "_CAPITALIZED_"),
+    (re.compile("^[A-Z]+$"), "_UPPERCASE_"),
+    (re.compile("^[a-z]+$"), "_LOWERCASE_")
+    #(re.compile("-"), "_HYPHEN_"),    
+  ]
+  for pattern, name in classes:
+    if pattern.search(word) != None:
+      return name
+  return "_RARE_"
+  
+
   
