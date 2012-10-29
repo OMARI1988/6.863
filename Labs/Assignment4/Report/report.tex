@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Answers for 6.863 Assignment2
+% Created by Salman Ahmad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}
+
+\setlength{\topmargin}{-0.8in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.25in}
+
+
+\usepackage{sectsty}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{subfigure}
+
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\small}
+
+\newcommand{\handout}[3]{
+  \renewcommand{\thepage}{#1 - \arabic{page}}
+  \noindent
+  \begin{center}
+    \hspace*{-0.25in}\framebox[6.5in]{
+      \vbox{
+        \hbox to 6.25in { {\bf 6.863J/9.611J: Natural Language Processing } 
+                          \hfill Prof. Robert C. Berwick }
+        \vspace{4mm}
+        \hbox to 6.25in { {\Large \hfill #1  \hfill} }
+        \vspace{2mm}
+        \hbox to 6.25in { {\it #2 \hfill #3} }
+        }
+      }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\begin{document}
+\handout{Assignment 4: HMM named-entity tagging}{My posse consists of: Sam Ainsley}{Salman Ahmad (saahmad@mit.edu)}
+
+\begin{enumerate}
+
+\item {\bf Problem 1}
+
+The results from the unigram are:
+
+\begin{verbatim}
+Found 14043 NEs. Expected 5931 NEs; Correct: 3117.
+
+	 precision 	recall 		F1-Score
+Total:	 0.221961	0.525544	0.312106
+PER:	 0.435451	0.231230	0.302061
+ORG:	 0.475936	0.399103	0.434146
+LOC:	 0.147750	0.870229	0.252612
+MISC:	 0.491689	0.610206	0.544574
+
+\end{verbatim}
+
+\item {\bf Problem 2}
+
+The results from the bigram are:
+
+\begin{verbatim}
+Found 4472 NEs. Expected 5931 NEs; Correct: 3128.
+
+	 precision 	recall 		F1-Score
+Total:	 0.699463	0.527398	0.601365
+PER:	 0.617253	0.400979	0.486148
+ORG:	 0.531476	0.384903	0.446467
+LOC:	 0.841415	0.700109	0.764286
+MISC:	 0.756066	0.642780	0.694836
+
+\end{verbatim}
+
+The results seem to be an improvement over the unigram model. 
+
+\item {\bf Problem 3}
+
+The results from the trigram are:
+
+\begin{verbatim}
+Found 3926 NEs. Expected 5931 NEs; Correct: 3270.
+
+	 precision 	recall 		F1-Score
+Total:	 0.832909	0.551340	0.663488
+PER:	 0.861290	0.435800	0.578757
+ORG:	 0.712644	0.417040	0.526167
+LOC:	 0.860634	0.710469	0.778375
+MISC:	 0.869814	0.660152	0.750617
+
+\end{verbatim}
+
+As can be seen, the results improved from both the unigram and bigram models. 
+
+The one thing that stood out in development is that you needed to rely on smoothing to get decent results. Computing the trigram probabilities will often result in a bigram in the denominator that has never been seen before. For this problem, I just implemented Laplace smoothing to my trigrams and that worked well enough.
+
+
+\item {\bf Problem 4}
+
+\end{enumerate}
+\end{document}
+
