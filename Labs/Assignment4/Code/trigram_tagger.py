@@ -60,8 +60,6 @@ if __name__ == "__main__":
     words[i + 2] = "STOP"
     
     
-    
-    
     bp = defaultdict(str)
     pi = defaultdict(float)
     y = defaultdict(str)
