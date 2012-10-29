@@ -11,6 +11,9 @@ if __name__ == "__main__":
   counts_file = open(os.path.join(os.path.dirname(__file__), "ner.counts"))
   sentences_file = open(os.path.join(os.path.dirname(__file__), "ner_dev.dat"))
   
+  counts_file = open(sys.argv[1])
+  sentences_file = open(sys.argv[2])
+  
   hmm = Hmm()
   hmm.read_counts(counts_file)
   

@@ -12,6 +12,12 @@ if __name__ == "__main__":
   counts_file = open(os.path.join(os.path.dirname(__file__), "ner.counts"))
   sentences_file = open(os.path.join(os.path.dirname(__file__), "ner_dev.dat"))
   
+  counts_file = open(sys.argv[1])
+  sentences_file = open(sys.argv[2])
+  
+  
+  infrequent_count = 5
+  
   hmm = Hmm()
   hmm.read_counts(counts_file)
   
@@ -24,7 +30,7 @@ if __name__ == "__main__":
   
   for word in word_counts:
     count = word_counts[word]
-    if count < 5:
+    if count < infrequent_count:
       for tag in hmm.all_states:
         if (word, tag) in hmm.emission_counts:
           #hmm.emission_counts[("_RARE_", tag)] += count
@@ -53,7 +59,7 @@ if __name__ == "__main__":
     for i in range(0, n):
       word = sentence[i][1]
       original_words.append(word)
-      if not(word in word_counts) or (word_counts[word] < 5):
+      if not(word in word_counts) or (word_counts[word] < infrequent_count):
         word = "_RARE_"
       words[i + 1] = word
     
