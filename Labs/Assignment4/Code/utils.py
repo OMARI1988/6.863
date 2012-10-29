@@ -10,7 +10,12 @@ def arg_max(iterator, callback):
   return (max_index, max_value)
 
 def emission_probability(word, tag, counts):
-  return counts.emission_counts[(word, tag)] / counts.ngram_counts[0][(tag,)]
+  if tag == "*":
+    denominator = counts.ngram_counts[1][(tag, tag)]
+  else:
+    denominator = counts.ngram_counts[0][(tag,)]
+  
+  return counts.emission_counts[(word, tag)] / denominator
 
 def bigram_probability(tag1, tag2, counts):
   if tag1 == "*":
@@ -20,10 +25,8 @@ def bigram_probability(tag1, tag2, counts):
   
   return counts.ngram_counts[1][(tag1, tag2)] / denominator
 
-def trigram_probability(tag1, tag2, tag3, counts):
+def trigram_probability(tag1, tag2, tag3, counts, vocab_size):
+  numerator = counts.ngram_counts[2][(tag1, tag2, tag3)]
   denominator = counts.ngram_counts[1][(tag1, tag2)]
-  if denominator == 0:
-    denominator = 1
-  
-  return counts.ngram_counts[2][(tag1, tag2, tag3)] / denominator
+  return  (numerator + 1) / (denominator + vocab_size)
   

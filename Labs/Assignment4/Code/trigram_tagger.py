@@ -1,4 +1,5 @@
 
+from copy import copy
 from collections import defaultdict
 from count_freqs import *
 from utils import *
@@ -19,100 +20,101 @@ if __name__ == "__main__":
   for word, tag in hmm.emission_counts:
     word_counts[word] += hmm.emission_counts[(word, tag)]
   
+  vocab_size = len(word_counts)
+  
   for word in word_counts:
     count = word_counts[word]
     if count < 5:
       for tag in hmm.all_states:
         if (word, tag) in hmm.emission_counts:
-          hmm.emission_counts[("_RARE_", tag)] += count
+          #hmm.emission_counts[("_RARE_", tag)] += count
+          hmm.emission_counts[("_RARE_", tag)] += hmm.emission_counts[(word, tag)]
   
   
   
-  initial_probability = defaultdict(float)
-  initial_tag = None
-  
-  for tag in hmm.all_states:
-    initial_probability[tag] = trigram_probability("*", "*", tag, hmm)
-  
-  initial_tag = arg_max(hmm.all_states, lambda tag: trigram_probability("*", "*", tag, hmm))[0]
-  
+  states = hmm.all_states.copy()
+  #states.add("*")
   
   
   sentences = sentence_iterator(simple_conll_corpus_iterator(sentences_file))
   
+  
+  
+  counters = 0
+  
   for sentence in sentences:
     original_words = []
-    words = []
-    for _, word in sentence:
-      if not(word in word_counts) or (word_counts[word] < 5):
-        words.append("_RARE_")
-      else:
-        words.append(word)
+    words = defaultdict(str)
+    n = len(sentence)
+    
+    words[-1] = "*"
+    words[0] = "*"
+    
+    for i in range(0, n):
+      word = sentence[i][1]
       original_words.append(word)
+      if not(word in word_counts) or (word_counts[word] < 5):
+        word = "_RARE_"
+      words[i + 1] = word
     
-    t1 = defaultdict(float)
-    t2 = defaultdict(str)
-    
-    x_probs = defaultdict(float)
-    x = defaultdict(str)
-    
-    for tag in hmm.all_states:
-      t1[(tag, 0)] = initial_probability[tag] * emission_probability(words[0], tag, hmm)
-      t2[(tag, 0)] = initial_tag
-    
-    i = 1
-    for j in hmm.all_states:
-      t2[(j, i)], t1[(j, i)] = arg_max(hmm.all_states, lambda k: t1[(k, i - 1)] * bigram_probability(k , j, hmm) * emission_probability(words[i], j, hmm))
+    words[i + 2] = "STOP"
     
     
-    for i in range(2, len(words)):
-      for j in hmm.all_states:
-        max_probability = -1
-        max_tag = None
-        for k in hmm.all_states:
-          for l in hmm.all_states:
-            probability = t1[(l, i - 2)] * t1[(k, i - 1)] * trigram_probability(l, k, j, hmm) * emission_probability(words[i], j, hmm)
-            if probability > max_probability:
-              max_probability = probability
-              max_tag = k
-        
-        t1[(j, i)] = max_probability
-        t2[(j, i)] = max_tag
     
-    x[len(words) - 1], x_probs[len(words) - 1] = arg_max(hmm.all_states, lambda k: t1[(k, len(words) - 1)])
     
-    max_probability = -1
-    max_tag = None
-    for j in hmm.all_states:
-      for k in hmm.all_states:
-        prob = t1[(k, len(words) - 1)] * t1[(j, len(words) - 2)]
-        if prob > max_probability:
-          max_probability = prob
-          max_tag = j
-          
-    x[len(words) - 2] = max_tag
-    x_probs[len(words) - 2] = max_probability
+    bp = defaultdict(str)
+    pi = defaultdict(float)
+    y = defaultdict(str)
+    y_probs = defaultdict(float)
     
-    for i in reversed(range(2, len(words))):
-      max_probability = -1
-      max_tag = None
-      for j in hmm.all_states:
-        for k in hmm.all_states:
-          prob = t1[(k, i - 1)] * t1[(j, i - 2)]
-          if prob > max_probability:
-            max_probability = prob
-            max_tag = j
-      
-      x[i - 2] = max_tag
-      x_probs[i - 2] = max_probability
+    for u in states:
+      for v in states:
+        pi[(0, u, v)] = trigram_probability("*", u, v, hmm, vocab_size)
     
-    print x
-    print x_probs
     
-    for i in range(0, len(words)):
-      print original_words[i] + " " + x[i] + " " + str(math.log(x_probs[i])/math.log(2))
+    for k in range(1, n + 1):
+      word = words[k]
+      for u in states:
+        for v in states:
+          max_prob = -1
+          max_tag = None
+          for w in states:
+            prob = pi[(k - 1, w, u)] * trigram_probability(w, u, v, hmm, vocab_size) * emission_probability(word, v, hmm)
+            if prob > max_prob:
+              max_prob = prob
+              max_tag = w
+          pi[(k, u, v)] = max_prob
+          bp[(k, u, v)] = max_tag
+    
+    
+    max_prob = -1
+    max_tag = (None, None)
+    for u in hmm.all_states:
+      for v in hmm.all_states:
+        prob = pi[(n, u, v)] * trigram_probability(u, v, "STOP", hmm, vocab_size)
+        if prob > max_prob:
+          max_prob = prob
+          max_tag = (u, v)
+    
+    y[n - 1] = max_tag[0]
+    y[n] = max_tag[1]
+    
+    y_probs[n - 1] = max_prob
+    y_probs[n] = max_prob
+    
+    for k in reversed(range(1, n - 1)):
+      y[k] = bp[(k + 2, y[k + 1], y[k + 2])]
+      y_probs[k] = pi[(k + 2, y[k + 1], y[k + 2])]
+    
+    
+    for i in range(0, len(original_words)):
+      print original_words[i] + " " + y[i + 1] + " " + str(math.log(y_probs[i + 1])/math.log(2))
     print ""
     
-    sys.exit()
+    counters += 1
+    if counters == 5:
+      #sys.exit()
+      pass
+    
   
   
