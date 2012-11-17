@@ -1,0 +1,10 @@
+(S
+(NP-SBJ
+(NP (DT the) (NN luxury) (NN auto))
+    (NN maker)
+    (JJ last)
+    (NN year))
+    (VP
+    (VBN sold)
+    (NP (CD 1,000) (NNS cars))
+    (PP (IN in) (NP (DT the) (NNP U.S.)))))
