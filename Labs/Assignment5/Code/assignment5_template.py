@@ -84,72 +84,72 @@ index_of_correct_parse_tree_FORMAT = 'integer'
 # === question 3: probabilistic context-free parsing
 
 # what are the rules for expanding the nonterminal 'VP' and their associated probabilities?
-rules_for_expanding_VP_ANSWER = 'FILLIN'
+rules_for_expanding_VP_ANSWER = {'V1 SBAR': 0.333333333333, 'V2': 0.333333333333, 'VP ADVP':0.333333333333}
 rules_for_expanding_VP_FORMAT = 'dictionary of rule probabilities' # dictionary mapping elements rule expands to -> probability. ex: {'V PP': 0.1, 'V': 0.9} if the grammar is VP -> V PP [0.1]; VP -> V [0.9]. Order of elements in the dictionary doesn't matter.
 
 # find the two most-likely parses for 'Jeff pronounced that Fred snored loudly', and their probabilities
-most_likely_parse_ANSWER = 'FILLIN'
+most_likely_parse_ANSWER = '(S (NP Jeff) (VP (V1 pronounced) (SBAR (COMP that) (S (NP Fred) (VP (VP (V2 snored)) (ADVP loudly))))))'
 most_likely_parse_FORMAT = 'tree'
 
-most_likely_parse_probability_ANSWER = 'FILLIN'
+most_likely_parse_probability_ANSWER = 3.8103947569e-05
 most_likely_parse_probability_FORMAT = 'probability'
 
-second_most_likely_parse_ANSWER = 'FILLIN'
+second_most_likely_parse_ANSWER = '(S (NP Jeff) (VP (VP (V1 pronounced) (SBAR (COMP that) (S (NP Fred) (VP (V2 snored))))) (ADVP loudly)))'
 second_most_likely_parse_FORMAT = 'tree'
 
-second_most_likely_parse_probability_ANSWER = 'FILLIN'
+second_most_likely_parse_probability_ANSWER = 3.8103947569e-05
 second_most_likely_parse_probability_FORMAT = 'probability'
 
 # getting rid of ambiguity by small changes to the corpus. What change did you make?
-change_made_to_remove_ambiguity_ANSWER = 'FILLIN'
+change_made_to_remove_ambiguity_ANSWER = 'I changed the examples from VP -> VP ADVP to VP -> V2 ADVP.'
 change_made_to_remove_ambiguity_FORMAT = 'freeform text'
 
 # What is the probability of the correct parse tree now?
-correct_parse_tree_probability_after_change_ANSWER = 'FILLIN'
+correct_parse_tree_probability_after_change_ANSWER = 0.000257201646091
 correct_parse_tree_probability_after_change_FORMAT = 'probability'
 
 # train a probabilistic grammar from the 10% wsj sample. How many rules does the grammar have?
-number_of_rules_in_grammar_ANSWER = 'FILLIN'
+number_of_rules_in_grammar_ANSWER = 27783
 number_of_rules_in_grammar_FORMAT = 'integer'
 
 # retrain your grammar using markov order-1 smoothing. How many rules does the grammar now have?
-number_of_rules_in_retrained_grammar_ANSWER = 'FILLIN'
+number_of_rules_in_retrained_grammar_ANSWER = 21845
 number_of_rules_in_retrained_grammar_FORMAT = 'integer'
 
 # use your smoothed gramar to parse these sentences. Report the number of constituents in the reference parse (as given in figure 1 of the handout), the number of constituents in the parse by the gramar you trained, and the number of constituents in the intersection (number of shared constituents).
 
 # The luxury auto maker last year sold 1,000 cars in the U.S.
-sentence1_num_constituents_ground_truth_ANSWER = 'FILLIN'
+sentence1_num_constituents_ground_truth_ANSWER = 19
 sentence1_num_constituents_ground_truth_FORMAT = 'integer'
 
-sentence1_num_constituents_parsed_by_your_grammar_ANSWER = 'FILLIN'
+sentence1_num_constituents_parsed_by_your_grammar_ANSWER = 19
 sentence1_num_constituents_parsed_by_your_grammar_FORMAT = 'integer'
 
-sentence1_num_constituents_shared_ANSWER = 'FILLIN'
+sentence1_num_constituents_shared_ANSWER = 15
 sentence1_num_constituents_shared_FORMAT = 'integer'
 
 # Bell Industries Inc. increased its quarterly to 10 cents from seven cents a share .
-sentence2_num_constituents_ground_truth_ANSWER = 'FILLIN'
+sentence2_num_constituents_ground_truth_ANSWER = 25
 sentence2_num_constituents_ground_truth_FORMAT = 'integer'
 
-sentence2_num_constituents_parsed_by_your_grammar_ANSWER = 'FILLIN'
+sentence2_num_constituents_parsed_by_your_grammar_ANSWER = 26
 sentence2_num_constituents_parsed_by_your_grammar_FORMAT = 'integer'
 
-sentence2_num_constituents_shared_ANSWER = 'FILLIN'
+sentence2_num_constituents_shared_ANSWER = 19
 sentence2_num_constituents_shared_FORMAT = 'integer'
 
 # The dispute shows clearly the global power of Japan 's financial titans .
-sentence3_num_constituents_ground_truth_ANSWER = 'FILLIN'
+sentence3_num_constituents_ground_truth_ANSWER = 22
 sentence3_num_constituents_ground_truth_FORMAT = 'integer'
 
-sentence3_num_constituents_parsed_by_your_grammar_ANSWER = 'FILLIN'
+sentence3_num_constituents_parsed_by_your_grammar_ANSWER = 21
 sentence3_num_constituents_parsed_by_your_grammar_FORMAT = 'integer'
 
-sentence3_num_constituents_shared_ANSWER = 'FILLIN'
+sentence3_num_constituents_shared_ANSWER = 20
 sentence3_num_constituents_shared_FORMAT = 'integer'
 
 # Was this why some of the audience departed before or during the second half ?
-sentence4_num_constituents_ground_truth_ANSWER = 'FILLIN'
+sentence4_num_constituents_ground_truth_ANSWER = 27
 sentence4_num_constituents_ground_truth_FORMAT = 'integer'
 
 # why can't the current grammar parse the fourth sentence? you should observe at least two problems and suggest fixes for each
