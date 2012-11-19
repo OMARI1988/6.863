@@ -52,33 +52,33 @@ peoples_preference_explanation_ANSWER = 'For me personally, I would rather pair 
 peoples_preference_explanation_FORMAT = 'freeform text'
 
 # Is it possible to write a standard LR parser without lookahead that will obtain the desired parses for both of these sentences, using our toy grammar? 
-does_lr_parser_without_lookahead_work_ANSWER = 'False'
+does_lr_parser_without_lookahead_work_ANSWER = False
 does_lr_parser_without_lookahead_work_FORMAT = 'boolean' # True or False
 
 # How about an LALR(1) parser?
-does_lalr1_parser_work_ANSWER = 'False'
+does_lalr1_parser_work_ANSWER = False
 does_lalr1_parser_work_FORMAT = 'boolean'
 
 # How about an LALR(2) parser?
-does_lalr2_parser_work_ANSWER = 'True'
+does_lalr2_parser_work_ANSWER = True
 does_lalr2_parser_work_FORMAT = 'boolean'
 
 # === question 2: scaling up using larger grammars ===
 
 # what is the size of the wsj.cfg grammar
-grammar_size_ANSWER = '26413'
+grammar_size_ANSWER = 26413
 grammar_size_FORMAT = 'integer' # 0, 1, etc
 
 # how many parse trees are there for the first, simple sentence: 'John is happy'?
-num_parse_trees_for_sentence_ANSWER = '33955'
+num_parse_trees_for_sentence_ANSWER = 33955
 num_parse_trees_for_sentence_FORMAT = 'integer'
 
 # are there any of the first 100 trees that correspond to what the 'correct' parse for 'John is happy' ought to be?
-is_correct_parse_tree_present_ANSWER = 'False'
+is_correct_parse_tree_present_ANSWER = False
 is_correct_parse_tree_present_FORMAT = 'boolean'
 
 # if your answer to the previous question was True, what is the [zero-based] index of the correct parse in the list of parses? [If it isn't among the first 100 parse trees, just enter -1]
-index_of_correct_parse_tree_ANSWER = '-1'
+index_of_correct_parse_tree_ANSWER = -1
 index_of_correct_parse_tree_FORMAT = 'integer'
 
 # === question 3: probabilistic context-free parsing
@@ -153,7 +153,7 @@ sentence4_num_constituents_ground_truth_ANSWER = 27
 sentence4_num_constituents_ground_truth_FORMAT = 'integer'
 
 # why can't the current grammar parse the fourth sentence? you should observe at least two problems and suggest fixes for each
-why_cant_current_grammar_parse_sentence4_ANSWER = 'FILLIN'
+why_cant_current_grammar_parse_sentence4_ANSWER = 'The word "departed" does not seem to be in the grammar. I confirmed this by running "grammar.productions(rhs = \'departed\')" and noting that it returned an empty list. Furthermore, the grammar did not learn "SQ -> VBD NP-SBJ SBAR-PRD" or a similar rule. I confirmed this by running: "grammar.productions(lhs = nltk.grammar.Nonterminal(\'SQ\'), rhs = nltk.grammar.Nonterminal(\'VBD\'))". To solve this problem you could train a parser in a similar fashion to the named-entity tagger we did in the last assignment where you learn unseen words by inserting _RARE_ tokens for infrequent words. You could extend that idea with non-terminals as well so you can use grammar rules even if you have never seen them before.'
 why_cant_current_grammar_parse_sentence4_FORMAT = 'freeform text'
 
 # === END OF YOUR SUBMISSION, DON'T MODIFY THIS LINE OR ANYTHING BELOW IT ===
