@@ -118,7 +118,7 @@ table8_ANSWER = 'LOW'
 table8_FORMAT = 'HIGH or LOW'
 
 # What explains the pattern of HIGH and LOW attachments that you got in the previous problem?
-high_low_attachment_pattern_ANSWER = 'Sold almost always appears with VP -> VBN NP PP (a high assignment). '
+high_low_attachment_pattern_ANSWER = 'Basically, whenever you see (NN Milk) in the training data and it is not part of a PP (so, milk is the "head" of the noun phrase) there is often a PP that is hanging from it (in otherwords, the PP is hanging "LOW"). For examples: "(VP (VBZ Concocts) (NP (NP (DT a) (NN Milk) ) (PP (IN For) (NP (JJ Hispanic) (NNS Tastes) ))))))" and "(NP (NP (ADJP (RB considerably) (JJR more) ) (JJ whole) (NN milk) ) (PP (IN than) (NP (JJ reduced-fat) (NNS milks) )))"'
 high_low_attachment_pattern_FORMAT = 'freeform text'
 
 # === END OF YOUR SUBMISSION, DON'T MODIFY THIS LINE OR ANYTHING BELOW IT ===
