@@ -42,11 +42,11 @@ sentence_length_and_likelihood_relationship_ANSWER = 'The longer the sentences s
 sentence_length_and_likelihood_relationship_FORMAT = 'freeform text'
 
 # Is there any difference between the scores when you substitute 'broker' for 'witch'?
-is_there_a_difference_in_score_ANSWER = False
+is_there_a_difference_in_score_ANSWER = True
 is_there_a_difference_in_score_FORMAT = 'boolean' # True or False
 
 # Why or why not?
-why_or_why_not_is_score_different_ANSWER = 'Granted, while the scores are not "identical" they are not as different as the change you see between longer and shorter sentences. The reason for this is that the Bikel parser only takes into account the part of speech, not the actual word itself. Thus, the Bikel parser (which does take into account context) is unable to see that "wicked witch" may be more likely than "wicked broker" because all it sees is "JJ NN". The reason the scores are not "identical" is because the actual part of speech tagger itself may have associated different likelihoods to each word which get propogated up to the parser. In fact, this is probably why the parser thinks that "wicked broker" is actually more likely than "wicked witch" because the "broker" may be more common than "witch" when you remove the surrounding context.'
+why_or_why_not_is_score_different_ANSWER = 'Despite the fact that we could have simplyed guessed that the scores would not be "identical" because they are floating point numbers (and comparing equality on floating point numbers does not make sense) but the main point here is that the grammaticality of a sentence does change the probability of the parse tree. By switching between "broker" and "witch" we notice that the probability does in fact change despite the fact that both sentences are grammatically equivalent. At a technical level, the reason why the probabilities are different is because the actual part of speech tagger itself may have associated different likelihoods to each word which get propogated up to the parser. This also beautifully illustrates the fact that the parser, which takes into account surrounding context, does not see the actual words but rather only sees the part of speech. We can observe this fact because the parser thinks that "wicked broker" is actually more likely than "wicked witch" because the word "broker" by itself may be more common than "witch" by itself.'
 why_or_why_not_is_score_different_FORMAT = 'freeform text'
 
 # List the log probability of the parses of each of these sentences (using the Bikel parser)
@@ -118,7 +118,7 @@ table8_ANSWER = 'LOW'
 table8_FORMAT = 'HIGH or LOW'
 
 # What explains the pattern of HIGH and LOW attachments that you got in the previous problem?
-high_low_attachment_pattern_ANSWER = 'Basically, whenever you see (NN Milk) in the training data and it is not part of a PP (so, milk is the "head" of the noun phrase) there is often a PP that is hanging from it (in otherwords, the PP is hanging "LOW"). For example: "(VP (VBZ Concocts) (NP (NP (DT a) (NN Milk) ) (PP (IN For) (NP (JJ Hispanic) (NNS Tastes) ))))))" and "(NP (NP (ADJP (RB considerably) (JJR more) ) (JJ whole) (NN milk) ) (PP (IN than) (NP (JJ reduced-fat) (NNS milks) )))"'
+high_low_attachment_pattern_ANSWER = 'To be direct, the thing that leads to the patterns seen above are the actual examples in the training corpus. When you look through the corpus and search for (NN Milk) you will find that most of the sentences attach the PP to NP headed by "milk" rather than the VP. For example: "(VP (VBZ Concocts) (NP (NP (DT a) (NN Milk) ) (PP (IN For) (NP (JJ Hispanic) (NNS Tastes) ))))))" and "(NP (NP (ADJP (RB considerably) (JJR more) ) (JJ whole) (NN milk) ) (PP (IN than) (NP (JJ reduced-fat) (NNS milks) )))". Thus, despite the fact that the correct attachment should be based on the verb in the sentence, it seems that the training corpus "confuses" the parser and makes it think that the head of the NP is more important than the head of the VP - at least when it comes to NP headed by "Milk". What this demonstrates is that it is really important to have a large and diverse training data so that your parser does not learn the wrong things.'
 high_low_attachment_pattern_FORMAT = 'freeform text'
 
 # === END OF YOUR SUBMISSION, DON'T MODIFY THIS LINE OR ANYTHING BELOW IT ===
