@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Answers for 6.863 Assignment 6
+% Created by Salman Ahmad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}
+
+\setlength{\topmargin}{-0.8in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.25in}
+\setlength{\parindent}{0in}
+
+\usepackage{sectsty}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{longtable}
+
+\def\arraystretch{1.5}%  1 is the default, change whatever you need
+
+
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\small}
+
+\newcommand{\handout}[3]{
+  \renewcommand{\thepage}{#1 - \arabic{page}}
+  \noindent
+  \begin{center}
+    \hspace*{-0.25in}\framebox[6.5in]{
+      \vbox{
+        \hbox to 6.25in { {\bf 6.863J/9.611J: Natural Language Processing } 
+                          \hfill Prof. Robert C. Berwick }
+        \vspace{4mm}
+        \hbox to 6.25in { {\Large \hfill #1  \hfill} }
+        \vspace{2mm}
+        \hbox to 6.25in { {\it #2 \hfill #3} }
+        }
+      }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\begin{document}
+
+\handout{Assignment 6: Statistical Parsing and Lexical Semantics}{My posse consists of: {\tt null}}{Salman Ahmad (saahmad@mit.edu)}
+
+\section*{Part II: Semantic Analysis of ``{\tt Invest}''}
+
+\subsection*{Data Collection}
+
+To collect all of the occurrences of ``invest'' along with their subcategorization frame I used the follow {\bf {\tt tregex}} query on the supplied subset of the Penn Tree Bank:
+
+{\tt
+\begin{verbatim}
+@VP < ( __< /^[Ii]nvest[esi]|^[Ii]nvest$/ )
+\end{verbatim}
+}
+
+The query returned 150 matches in 149 trees.
+
+\subsection*{Analysis}
+
+A summary of the data is shown in the next section.
+
+ 
+
+
+\subsection*{Data Tabulation}
+
+The table below displays the number of times a unique subcategorization frame exists in the Penn Tree Bank. 
+
+\begin{centering}
+
+
+\begin{longtable}{ l l }
+
+\caption{Subcategory counts}\\
+
+\hline
+\hline
+
+\textbf{Subcategory} & \textbf{Count} \\
+
+\hline
+\hline
+
+\endfirsthead
+
+\multicolumn{2}{c}
+
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+
+\hline
+\hline
+
+\textbf{Subcategory} & \textbf{Count} \\
+
+\hline
+\hline
+
+\endhead
+
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+
+\endfoot
+
+\hline
+\hline
+
+\endlastfoot
+
+\hline
+
+[VP (VBG investing) PP-CLR] & 13 \\ \hline
+[VP (VB invest) PP-CLR] & 12 \\ \hline
+[VP (VBG investigating) NP] & 11 \\ \hline
+[VP (VB invest) NP PP-CLR] & 8 \\ \hline
+[VP (VB investigate) NP] & 5 \\ \hline
+[VP (VBG investigating) SBAR] & 4 \\ \hline
+[VP (VBN invested) NP PP-CLR] & 4 \\ \hline
+[VP (VBN invested) PP-CLR] & 4 \\ \hline
+[VP (VBG investing) NP] & 3 \\ \hline
+[VP (VB invest) ADVP-LOC] & 2 \\ \hline
+[VP (VB invest) NP PP-LOC-CLR] & 2 \\ \hline
+[VP (VB invest) ] & 2 \\ \hline
+[VP (VB investigate) SBAR] & 2 \\ \hline
+[VP (VBD invested) PP-CLR] & 2 \\ \hline
+[VP (VBD investigated) NP] & 2 \\ \hline
+[VP (VBG investing) NP PP-CLR] & 2 \\ \hline
+[VP (VBN invested) NP ADVP-LOC] & 2 \\ \hline
+[VP (VBN invested) NP PP-CLR PP-TMP] & 2 \\ \hline
+[VP (VBN invested) NP PP-CLR-LOC] & 2 \\ \hline
+[VP (VBP invest) PP-CLR] & 2 \\ \hline
+[VP (VBZ investigates) NP] & 2 \\ \hline
+[VP (VB invest) , SBAR-ADV] & 1 \\ \hline
+[VP (VB invest) ADVP-MNR PP-CLR PP-TMP] & 1 \\ \hline
+[VP (VB invest) ADVP-MNR] & 1 \\ \hline
+[VP (VB invest) NP ADVP-LOC PP-MNR] & 1 \\ \hline
+[VP (VB invest) NP ADVP-LOC-CLR] & 1 \\ \hline
+[VP (VB invest) NP PP-CLR , NP-2] & 1 \\ \hline
+[VP (VB invest) NP PP-CLR , PP-2] & 1 \\ \hline
+[VP (VB invest) NP PP-CLR S-PRP] & 1 \\ \hline
+[VP (VB invest) NP PP-CLR SBAR-1] & 1 \\ \hline
+[VP (VB invest) NP PP-TMP PP-LOC-CLR S-CLR] & 1 \\ \hline
+[VP (VB invest) NP S-PRP] & 1 \\ \hline
+[VP (VB invest) NP] & 1 \\ \hline
+[VP (VB invest) PP-CLR PP-PRP] & 1 \\ \hline
+[VP (VB invest) PP-LOC-CLR NP] & 1 \\ \hline
+[VP (VB invest) PP-LOC-CLR] & 1 \\ \hline
+[VP (VB invest) PP-TMP] & 1 \\ \hline
+[VP (VB investigate) CC VB NP] & 1 \\ \hline
+[VP (VB investigate) SBAR-NOM] & 1 \\ \hline
+[VP (VB investigate) ] & 1 \\ \hline
+[VP (VBD invested) NP ADVP-TMP PP-CLR] & 1 \\ \hline
+[VP (VBD invested) NP PP-CLR PP-TMP] & 1 \\ \hline
+[VP (VBD invested) NP PP-CLR PP] & 1 \\ \hline
+[VP (VBD invested) NP PP-CLR] & 1 \\ \hline
+[VP (VBD invested) NP PP-LOC-CLR , S-PRP] & 1 \\ \hline
+[VP (VBD invested) NP PP-LOC] & 1 \\ \hline
+[VP (VBD invested) NP PP] & 1 \\ \hline
+[VP (VBD invested) NP S-PRP-CLR] & 1 \\ \hline
+[VP (VBD invested) NP] & 1 \\ \hline
+[VP (VBD invested) PP-CLR NP] & 1 \\ \hline
+[VP (VBD investigated) SBAR-NOM] & 1 \\ \hline
+[VP (VBG investigating) NP PP-MNR] & 1 \\ \hline
+[VP (VBG investigating) NP PP-TMP , SBAR-ADV] & 1 \\ \hline
+[VP (VBG investigating) NP-1 PP-CLR] & 1 \\ \hline
+[VP (VBG investigating) PP-MNR] & 1 \\ \hline
+[VP (VBG investing) ADVP PP-CLR] & 1 \\ \hline
+[VP (VBG investing) ADVP-MNR PP-CLR] & 1 \\ \hline
+[VP (VBG investing) ADVP-MNR PP-LOC] & 1 \\ \hline
+[VP (VBG investing) NP PP-LOC-CLR] & 1 \\ \hline
+[VP (VBG investing) NP S-PRP] & 1 \\ \hline
+[VP (VBG investing) PP-CLR ADVP-TMP] & 1 \\ \hline
+[VP (VBG investing) PP-CLR SBAR-1] & 1 \\ \hline
+[VP (VBG investing) PP-LOC-CLR] & 1 \\ \hline
+[VP (VBG investing) PP-PRP] & 1 \\ \hline
+[VP (VBN invested) ADVP-MNR PP-CLR] & 1 \\ \hline
+[VP (VBN invested) ADVP-MNR PP-LOC-CLR , SBAR-TMP] & 1 \\ \hline
+[VP (VBN invested) NP PP-LOC-CLR , PP] & 1 \\ \hline
+[VP (VBN invested) NP PP-LOC-CLR] & 1 \\ \hline
+[VP (VBN invested) NP PP-TMP] & 1 \\ \hline
+[VP (VBN invested) NP PP] & 1 \\ \hline
+[VP (VBN invested) PP-CLR PP-TMP] & 1 \\ \hline
+[VP (VBN invested) PP-LOC-CLR-2 PP-TMP] & 1 \\ \hline
+[VP (VBN investigated) NP PP PP-PRP] & 1 \\ \hline
+[VP (VBN investigated) NP PP] & 1 \\ \hline
+[VP (VBN investigated) NP] & 1 \\ \hline
+[VP (VBP invest) ADVP PP-LOC-CLR ADVP-LOC] & 1 \\ \hline
+[VP (VBP invest) ADVP-LOC] & 1 \\ \hline
+[VP (VBP invest) PP-LOC-CLR] & 1 \\ \hline
+[VP (VBZ invests) ADVP PP-CLR] & 1 \\ \hline
+[VP (VBZ invests) ADVP PP-LOC-CLR] & 1 \\ \hline
+[VP (VBZ invests) ADVP PP-LOC] & 1 \\ \hline
+[VP (VBZ invests) NP NP-TMP PP-CLR SBAR-ADV] & 1 \\ \hline
+[VP (VBZ invests) NP PP-CLR] & 1 \\ \hline
+
+
+\end{longtable}
+\end{centering}
+
+
+\end{document}
+
