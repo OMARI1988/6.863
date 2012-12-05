@@ -21,7 +21,7 @@ who_are_my_collaborators_FORMAT = 'list of strings' # ie, ['John Doe', 'Jane Doe
 # === question 1: using modern probabilistic parsers ===
 
 # What information was present in the NLTK parser's part-of-speech assignments that is not conveyed between the maximum entropy tagger and the Bikel parser?
-info_lost_when_using_maxent_tagger_ANSWER = 'The Bikel parser only sees the part of speech tag and does not get to see the actual word itself. So the parser is "at the mercy" of the tagger to do its job correctly.'
+info_lost_when_using_maxent_tagger_ANSWER = 'The Bikel parser only sees the part of speech tag and does not get to see the actual word itself. So the parser is at the mercy of the tagger to do its job correctly.'
 info_lost_when_using_maxent_tagger_FORMAT = 'freeform text'
 
 # what is the first sentence in the training set where the (Bikel) parser makes an error with Precision < 100% ? Report the sentence number and the actual sentence
@@ -80,7 +80,7 @@ sentence7_logprob_ANSWER = -40.74
 sentence7_logprob_FORMAT = 'float'
 
 # Based on this, do you think the alignment between grammaticality and likelihood is accurate?
-alignment_between_grammaticality_and_likelihood_ANSWER = 'No. The best example is to look at sentences 6 and 7. Both of these sentences are the most simliar allowing us the test the "all other things considered equal" theory. They are the same lenngth (in words), produce the exact same parts of speech tags and exact same parse tree structure. However, (6) is ungramatical while (7) is. Interestingly enough, 6 is MORE likely than 7 despite it being ungrammatical. Thus, there does not seem to be a good alignment between gramticality and likelihood.'
+alignment_between_grammaticality_and_likelihood_ANSWER = 'No. The best example is to look at sentences 6 and 7. Both of these sentences are the most simliar allowing us the test the "all other things considered equal" theory. They are the same length (in words), produce the exact same parts of speech tags and exact same parse tree structure. However, (6) is ungramatical while (7) is. Interestingly enough, 6 is MORE likely than 7 despite it being ungrammatical. Thus, there does not seem to be a good alignment between grammaticality and likelihood.'
 alignment_between_grammaticality_and_likelihood_FORMAT = 'freeform text'
 
 # Fill out the rest of the table, with either the entries 'high' or 'low', first recording the results from your parse of mixed the milk with the water, and then the rest of the table entries, which are blank.
@@ -118,7 +118,7 @@ table8_ANSWER = 'LOW'
 table8_FORMAT = 'HIGH or LOW'
 
 # What explains the pattern of HIGH and LOW attachments that you got in the previous problem?
-high_low_attachment_pattern_ANSWER = 'Basically, whenever you see (NN Milk) in the training data and it is not part of a PP (so, milk is the "head" of the noun phrase) there is often a PP that is hanging from it (in otherwords, the PP is hanging "LOW"). For examples: "(VP (VBZ Concocts) (NP (NP (DT a) (NN Milk) ) (PP (IN For) (NP (JJ Hispanic) (NNS Tastes) ))))))" and "(NP (NP (ADJP (RB considerably) (JJR more) ) (JJ whole) (NN milk) ) (PP (IN than) (NP (JJ reduced-fat) (NNS milks) )))"'
+high_low_attachment_pattern_ANSWER = 'Basically, whenever you see (NN Milk) in the training data and it is not part of a PP (so, milk is the "head" of the noun phrase) there is often a PP that is hanging from it (in otherwords, the PP is hanging "LOW"). For example: "(VP (VBZ Concocts) (NP (NP (DT a) (NN Milk) ) (PP (IN For) (NP (JJ Hispanic) (NNS Tastes) ))))))" and "(NP (NP (ADJP (RB considerably) (JJR more) ) (JJ whole) (NN milk) ) (PP (IN than) (NP (JJ reduced-fat) (NNS milks) )))"'
 high_low_attachment_pattern_FORMAT = 'freeform text'
 
 # === END OF YOUR SUBMISSION, DON'T MODIFY THIS LINE OR ANYTHING BELOW IT ===
