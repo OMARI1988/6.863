@@ -22,6 +22,13 @@
 \def\arraystretch{1.5}%  1 is the default, change whatever you need
 
 
+\usepackage{array,etoolbox}
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+
+
 \sectionfont{\large}
 \subsectionfont{\normalsize}
 \subsubsectionfont{\small}
@@ -56,18 +63,42 @@ To collect all of the occurrences of ``invest'' along with their subcategorizati
 
 {\tt
 \begin{verbatim}
-@VP < ( __< /^[Ii]nvest[esi]|^[Ii]nvest$/ )
+@VP < ( __< /^[Ii]nvest[esi]$|^[Ii]nvest$/ )
 \end{verbatim}
 }
 
-The query returned 150 matches in 149 trees.
+The query returned 52 matches in 52 trees.
 
 \subsection*{Analysis}
 
 A summary of the data is shown in the next section.
 
- 
+\hspace{1in}
 
+According to Levin the word ``invest'' is mainly used as an ``fulfilling'' verb that is used to describe something that will be provided or utilized in the future. ``Invest'' can be used in two subtle different contexts: it can be used to specify the {\bf act} that is being provided and it can also be used to specify the {\bf thing or item} that is being provided. The verb typically appears in a ``NP V NP to / with NP'' frame. For example:
+
+
+\begin{itemize}
+\item ``John invested the land to Sally''
+\end{itemize}
+
+
+Looking at the subcategories in the Data Tabulation section you can see that not all of the frames follow the ``NP V NP to / with NP'' subcategory that Levin describes. In fact, many of them do not even include a prepositional phrase at all, for example, subcategories (5, 7, 18) and many others. These usages are not described in Levin at all. Examples of uses of ``invest'' that are not accompanied by a preposition include:
+
+\begin{itemize}
+\item ``invest internationally''
+\item ``invest elsewhere''
+\end{itemize}
+
+Furthermore, Levin talks at length about the use of the ``to'' and ``with'' prepositions that are used with verbs like ``Invest''. However, this almost never appears in the Penn Tree Bank. Rather, the Penn Tree Bank is dominated by the use of the ``in'' preposition with invest. There are plenty of examples:
+
+\begin{itemize}
+\item ``invest money in stocks that they 'll need in the near future -- for example , for college tuition payments or retirement expenses''
+\item ``invest in common stocks''
+\item ``invest in business''
+\end{itemize}
+
+In summary, Levin primarily describes ``invest'' being used as an ``equip'' and ``fulfilling'' verb while in practice it seems rarely used in the context.
 
 \subsection*{Data Tabulation}
 
@@ -76,129 +107,55 @@ The table below displays the number of times a unique subcategorization frame ex
 \begin{centering}
 
 
-\begin{longtable}{ l l }
+\begin{longtable}{ l l l }
 
 \caption{Subcategory counts}\\
-
-\hline
-\hline
-
+\hline\hline
 \textbf{Subcategory} & \textbf{Count} \\
-
-\hline
-\hline
-
+\hline\hline
 \endfirsthead
-
 \multicolumn{2}{c}
-
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-
-\hline
-\hline
-
+\hline\hline
 \textbf{Subcategory} & \textbf{Count} \\
-
-\hline
-\hline
-
+\hline\hline
 \endhead
-
 \hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
-
 \endfoot
-
-\hline
-\hline
-
+\hline\hline
 \endlastfoot
-
 \hline
 
-[VP (VBG investing) PP-CLR] & 13 \\ \hline
-[VP (VB invest) PP-CLR] & 12 \\ \hline
-[VP (VBG investigating) NP] & 11 \\ \hline
-[VP (VB invest) NP PP-CLR] & 8 \\ \hline
-[VP (VB investigate) NP] & 5 \\ \hline
-[VP (VBG investigating) SBAR] & 4 \\ \hline
-[VP (VBN invested) NP PP-CLR] & 4 \\ \hline
-[VP (VBN invested) PP-CLR] & 4 \\ \hline
-[VP (VBG investing) NP] & 3 \\ \hline
-[VP (VB invest) ADVP-LOC] & 2 \\ \hline
-[VP (VB invest) NP PP-LOC-CLR] & 2 \\ \hline
-[VP (VB invest) ] & 2 \\ \hline
-[VP (VB investigate) SBAR] & 2 \\ \hline
-[VP (VBD invested) PP-CLR] & 2 \\ \hline
-[VP (VBD investigated) NP] & 2 \\ \hline
-[VP (VBG investing) NP PP-CLR] & 2 \\ \hline
-[VP (VBN invested) NP ADVP-LOC] & 2 \\ \hline
-[VP (VBN invested) NP PP-CLR PP-TMP] & 2 \\ \hline
-[VP (VBN invested) NP PP-CLR-LOC] & 2 \\ \hline
-[VP (VBP invest) PP-CLR] & 2 \\ \hline
-[VP (VBZ investigates) NP] & 2 \\ \hline
-[VP (VB invest) , SBAR-ADV] & 1 \\ \hline
-[VP (VB invest) ADVP-MNR PP-CLR PP-TMP] & 1 \\ \hline
-[VP (VB invest) ADVP-MNR] & 1 \\ \hline
-[VP (VB invest) NP ADVP-LOC PP-MNR] & 1 \\ \hline
-[VP (VB invest) NP ADVP-LOC-CLR] & 1 \\ \hline
-[VP (VB invest) NP PP-CLR , NP-2] & 1 \\ \hline
-[VP (VB invest) NP PP-CLR , PP-2] & 1 \\ \hline
-[VP (VB invest) NP PP-CLR S-PRP] & 1 \\ \hline
-[VP (VB invest) NP PP-CLR SBAR-1] & 1 \\ \hline
-[VP (VB invest) NP PP-TMP PP-LOC-CLR S-CLR] & 1 \\ \hline
-[VP (VB invest) NP S-PRP] & 1 \\ \hline
-[VP (VB invest) NP] & 1 \\ \hline
-[VP (VB invest) PP-CLR PP-PRP] & 1 \\ \hline
-[VP (VB invest) PP-LOC-CLR NP] & 1 \\ \hline
-[VP (VB invest) PP-LOC-CLR] & 1 \\ \hline
-[VP (VB invest) PP-TMP] & 1 \\ \hline
-[VP (VB investigate) CC VB NP] & 1 \\ \hline
-[VP (VB investigate) SBAR-NOM] & 1 \\ \hline
-[VP (VB investigate) ] & 1 \\ \hline
-[VP (VBD invested) NP ADVP-TMP PP-CLR] & 1 \\ \hline
-[VP (VBD invested) NP PP-CLR PP-TMP] & 1 \\ \hline
-[VP (VBD invested) NP PP-CLR PP] & 1 \\ \hline
-[VP (VBD invested) NP PP-CLR] & 1 \\ \hline
-[VP (VBD invested) NP PP-LOC-CLR , S-PRP] & 1 \\ \hline
-[VP (VBD invested) NP PP-LOC] & 1 \\ \hline
-[VP (VBD invested) NP PP] & 1 \\ \hline
-[VP (VBD invested) NP S-PRP-CLR] & 1 \\ \hline
-[VP (VBD invested) NP] & 1 \\ \hline
-[VP (VBD invested) PP-CLR NP] & 1 \\ \hline
-[VP (VBD investigated) SBAR-NOM] & 1 \\ \hline
-[VP (VBG investigating) NP PP-MNR] & 1 \\ \hline
-[VP (VBG investigating) NP PP-TMP , SBAR-ADV] & 1 \\ \hline
-[VP (VBG investigating) NP-1 PP-CLR] & 1 \\ \hline
-[VP (VBG investigating) PP-MNR] & 1 \\ \hline
-[VP (VBG investing) ADVP PP-CLR] & 1 \\ \hline
-[VP (VBG investing) ADVP-MNR PP-CLR] & 1 \\ \hline
-[VP (VBG investing) ADVP-MNR PP-LOC] & 1 \\ \hline
-[VP (VBG investing) NP PP-LOC-CLR] & 1 \\ \hline
-[VP (VBG investing) NP S-PRP] & 1 \\ \hline
-[VP (VBG investing) PP-CLR ADVP-TMP] & 1 \\ \hline
-[VP (VBG investing) PP-CLR SBAR-1] & 1 \\ \hline
-[VP (VBG investing) PP-LOC-CLR] & 1 \\ \hline
-[VP (VBG investing) PP-PRP] & 1 \\ \hline
-[VP (VBN invested) ADVP-MNR PP-CLR] & 1 \\ \hline
-[VP (VBN invested) ADVP-MNR PP-LOC-CLR , SBAR-TMP] & 1 \\ \hline
-[VP (VBN invested) NP PP-LOC-CLR , PP] & 1 \\ \hline
-[VP (VBN invested) NP PP-LOC-CLR] & 1 \\ \hline
-[VP (VBN invested) NP PP-TMP] & 1 \\ \hline
-[VP (VBN invested) NP PP] & 1 \\ \hline
-[VP (VBN invested) PP-CLR PP-TMP] & 1 \\ \hline
-[VP (VBN invested) PP-LOC-CLR-2 PP-TMP] & 1 \\ \hline
-[VP (VBN investigated) NP PP PP-PRP] & 1 \\ \hline
-[VP (VBN investigated) NP PP] & 1 \\ \hline
-[VP (VBN investigated) NP] & 1 \\ \hline
-[VP (VBP invest) ADVP PP-LOC-CLR ADVP-LOC] & 1 \\ \hline
-[VP (VBP invest) ADVP-LOC] & 1 \\ \hline
-[VP (VBP invest) PP-LOC-CLR] & 1 \\ \hline
-[VP (VBZ invests) ADVP PP-CLR] & 1 \\ \hline
-[VP (VBZ invests) ADVP PP-LOC-CLR] & 1 \\ \hline
-[VP (VBZ invests) ADVP PP-LOC] & 1 \\ \hline
-[VP (VBZ invests) NP NP-TMP PP-CLR SBAR-ADV] & 1 \\ \hline
-[VP (VBZ invests) NP PP-CLR] & 1 \\ \hline
-
+\rownumber)\space\space\space\space [VP (VB invest) PP-CLR] & 12 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-CLR] & 8 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) ADVP-LOC] & 2 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-LOC-CLR] & 2 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) ] & 2 \\ \hline
+\rownumber)\space\space\space\space [VP (VBP invest) PP-CLR] & 2 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) , SBAR-ADV] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) ADVP-MNR PP-CLR PP-TMP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) ADVP-MNR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP ADVP-LOC PP-MNR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP ADVP-LOC-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-CLR , NP-2] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-CLR , PP-2] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-CLR S-PRP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-CLR SBAR-1] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP PP-TMP PP-LOC-CLR S-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP S-PRP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) NP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) PP-CLR PP-PRP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) PP-LOC-CLR NP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) PP-LOC-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VB invest) PP-TMP] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBP invest) ADVP PP-LOC-CLR ADVP-LOC] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBP invest) ADVP-LOC] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBP invest) PP-LOC-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBZ invests) ADVP PP-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBZ invests) ADVP PP-LOC-CLR] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBZ invests) ADVP PP-LOC] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBZ invests) NP NP-TMP PP-CLR SBAR-ADV] & 1 \\ \hline
+\rownumber)\space\space\space\space [VP (VBZ invests) NP PP-CLR] & 1 \\ \hline
 
 \end{longtable}
 \end{centering}

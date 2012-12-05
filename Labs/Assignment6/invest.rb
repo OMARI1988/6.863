@@ -4,7 +4,7 @@ class Count
 	attr_accessor :count
 
 	def to_s
-		"#{@category} & #{@count} \\\\ \\hline"
+		"\\rownumber)\\space\\space\\space\\space #{@category} & #{@count} \\\\ \\hline"
 	end
 end
 
