@@ -15,7 +15,7 @@ what_is_my_name_ANSWER = 'Salman Ahmad'
 what_is_my_name_FORMAT = 'freeform text' # can be an arbitrary string, no format restrictions
 
 # what are the names of your collaborators, if any?
-who_are_my_collaborators_ANSWER = []
+who_are_my_collaborators_ANSWER = ['Sam Ainsley']
 who_are_my_collaborators_FORMAT = 'list of strings' # ie, ['John Doe', 'Jane Doe']
 
 # === question 1: using modern probabilistic parsers ===
